@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ 'Post details'|trans({'%id%': post.id|default('')}) }}
+{% endblock %}
+
+{% block body %}
+    <h1>{{ 'Post details'|trans({'%id%': task.id|default('')}) }}</h1>
+    {% if post is defined and post|length %}
+        <dl class="dl-horizontal">
+            <dt>{{ 'ID'|trans }}</dt>
+            <dd>{{ post.id }}</dd>
+            <dt>{{ 'Date'|trans }}</dt>
+            <dd>{{ post.date|date('Y/m/d') }}</dd>
+            <dt>{{ 'Name'|trans }}</dt>
+            <dd>{{ post.name }}</dd>
+            <dt>{{ 'Text'|trans }}</dt>
+            <dd>{{  post.text }}</dd>
+        </dl>
+        <p>
+            <a href="{{ url('post_index') }}" title="{{ 'Back to list'|trans }}">
+                {{ 'Back to list'|trans }}
+            </a>
+        </p>
+    {% else %}
+        <p>
+            {{ 'Item not found'|trans }}
+        </p>
+    {% endif %}
+{% endblock %}

@@ -96,6 +96,9 @@
     "doctrine/reflection": {
         "version": "1.2.1"
     },
+    "doctrine/sql-formatter": {
+        "version": "1.0.1"
+    },
     "egulias/email-validator": {
         "version": "2.1.17"
     },
@@ -114,8 +117,14 @@
             ".php_cs.dist"
         ]
     },
-    "jdorn/sql-formatter": {
-        "version": "v1.2.17"
+    "fzaninotto/faker": {
+        "version": "v1.9.1"
+    },
+    "knplabs/knp-components": {
+        "version": "v2.3.5"
+    },
+    "knplabs/knp-paginator-bundle": {
+        "version": "v5.2.0"
     },
     "laminas/laminas-code": {
         "version": "3.4.1"
@@ -566,6 +575,9 @@
         "version": "v4.4.6"
     },
     "twig/extra-bundle": {
+        "version": "v3.0.3"
+    },
+    "twig/intl-extra": {
         "version": "v3.0.3"
     },
     "twig/twig": {

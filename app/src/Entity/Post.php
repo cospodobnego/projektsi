@@ -1,16 +1,23 @@
 <?php
-
+/**
+ * Post entity.
+ */
 namespace App\Entity;
 
-use App\Repository\PostRepository;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=PostRepository::class)
+ * Class Post.
+ * @ORM\Entity(repositoryClass="App\Repository\PostRepository")
+ * @ORM\Table(name="posts")
  */
 class Post
 {
     /**
+     * Primary key.
+     * @var int
+     *
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
@@ -18,16 +25,27 @@ class Post
     private $id;
 
     /**
+     * Created at.
+     *
+     * @var DateTimeInterface
+     *
      * @ORM\Column(type="datetime")
      */
     private $date;
 
     /**
+     * Name
+     *
+     * @var string
+     *
      * @ORM\Column(type="string", length=45)
      */
     private $name;
 
     /**
+     * Text
+     *
+     * @var text
      * @ORM\Column(type="text")
      */
     private $text;
