@@ -5,13 +5,15 @@
 {% endblock %}
 
 {% block body %}
-    <h1>{{ 'Post details'|trans({'%id%': task.id|default('')}) }}</h1>
+    <h1>{{ 'Post details'|trans({'%id%': post.id|default('')}) }}</h1>
     {% if post is defined and post|length %}
         <dl class="dl-horizontal">
             <dt>{{ 'ID'|trans }}</dt>
             <dd>{{ post.id }}</dd>
             <dt>{{ 'Date'|trans }}</dt>
             <dd>{{ post.date|date('Y/m/d') }}</dd>
+            <dt>{{ 'Category'|trans }}</dt>
+            <dd>{{  post.category.name }}</dd>
             <dt>{{ 'Name'|trans }}</dt>
             <dd>{{ post.name }}</dd>
             <dt>{{ 'Text'|trans }}</dt>

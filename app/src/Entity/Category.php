@@ -1,0 +1,113 @@
+<?php
+/**
+ * Category entity.
+ */
+namespace App\Entity;
+
+use App\Repository\CategoryRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Class Category.
+ *
+ * @ORM\Entity(repositoryClass="App\Repository\CategoryRepository")
+ * @ORM\Table(name="categories")
+ */
+class Category
+{
+    /**
+     * Primary key.
+     *
+     * @var int
+     *
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
+     */
+    private $id;
+
+    /**
+     * Name.
+     *
+     * @var string
+     *
+     * @ORM\Column(
+     *     type="string",
+     *     length=45,
+     * )
+     */
+    private $name;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Post::class, mappedBy="category")
+     */
+    private $posts;
+
+    public function __construct()
+    {
+        $this->posts = new ArrayCollection();
+    }
+    /**
+     * Getter for Id.
+     *
+     * @return int|null Result
+     */
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    /**
+     * Getter for Name.
+     *
+     * @return string|null Name
+     */
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+    /**
+     * Setter for Name.
+     *
+     * @param string $name Name
+     */
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Post[]
+     */
+    public function getPosts(): Collection
+    {
+        return $this->posts;
+    }
+
+    public function addPost(Post $post): self
+    {
+        if (!$this->posts->contains($post)) {
+            $this->posts[] = $post;
+            $post->setCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removePost(Post $post): self
+    {
+        if ($this->posts->contains($post)) {
+            $this->posts->removeElement($post);
+            // set the owning side to null (unless already changed)
+            if ($post->getCategory() === $this) {
+                $post->setCategory(null);
+            }
+        }
+
+        return $this;
+    }
+}

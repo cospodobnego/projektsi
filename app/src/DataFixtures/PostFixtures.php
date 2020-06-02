@@ -1,17 +1,21 @@
 <?php
+/**
+ * Post fixtures.
+ */
 
 namespace App\DataFixtures;
 
 use App\Entity\Post;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
 
 /**
  * Class PostFixtures
- * @package App\DataFixtures
  */
 
-class PostFixtures extends AbstractBaseFixtures
+class PostFixtures extends AbstractBaseFixtures implements DependentFixtureInterface
+
 {
     /**
      * Load data.
@@ -22,15 +26,28 @@ class PostFixtures extends AbstractBaseFixtures
     public function loadData(ObjectManager $manager): void
     {
 
-        for($i = 0; $i < 10; ++$i){
+
+
+        $this->createMany(50, 'posts', function ($i) {
             $post = new Post();
-            $post->setName($this->faker->name);
+            $post->setName($this->faker->word);
             $post->setText($this->faker->sentence);
             $post->setDate($this->faker->dateTimeBetween('-100 days', '-1 days'));
-            $this->manager->persist($post);
+            $post->setCategory($this->getRandomReference('categories'));
 
-        }
+            return $post;
+        });
 
         $manager->flush();
+    }
+    /**
+     * This method must return an array of fixtures classes
+     * on which the implementing class depends on.
+     *
+     * @return array Array of dependencies
+     */
+    public function getDependencies(): array
+    {
+        return [CategoryFixtures::class];
     }
 }

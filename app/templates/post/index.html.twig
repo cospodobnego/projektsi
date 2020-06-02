@@ -19,7 +19,9 @@
         <th>{{ knp_pagination_sortable(pagination, 'Date'|trans, 'post.date') }}</th>
         <th>{{ knp_pagination_sortable(pagination, 'Name'|trans, 'post.name') }}</th>
         <th>{{ knp_pagination_sortable(pagination, 'Text'|trans, 'post.text') }}</th>
+        <th>{{ 'Category'|trans }}</th>
         <th>{{ 'Actions'|trans }}</th>
+
     </tr>
     </thead>
     <tbody>
@@ -29,6 +31,11 @@
             <td>{{ post.date|format_date('long') }}</td>
             <td>{{ post.name }}</td>
             <td>{{ post.text }}</td>
+            <td>
+                <a href="{{ url('category_show', {id: post.category.id}) }}" title="{{ 'view category'|trans }}">
+                    {{ post.category.name }}
+                </a>
+            </td>
             <td>
                 <a href="{{ url('post_show', {id: post.id}) }}" title="{{ 'view'|trans }}">
                     {{ 'view'|trans }}

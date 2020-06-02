@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ 'Comment details'|trans({'%id%': comment.id|default('')}) }}
+{% endblock %}
+
+{% block body %}
+    <h1>{{ 'Comment details'|trans({'%id%': comment.id|default('')}) }}</h1>
+    {% if comment is defined and comment|length %}
+        <dl class="dl-horizontal">
+            <dt>{{ 'ID'|trans }}</dt>
+            <dd>{{ comment.id }}</dd>
+            <dt>{{ 'Date'|trans }}</dt>
+            <dd>{{ comment.date|date('Y/m/d') }}</dd>
+            <dt>{{ 'Text'|trans }}</dt>
+            <dd>{{  comment.text }}</dd>
+            <dt>{{ 'Post ID'|trans }}</dt>
+            <dd>{{  comment.post.id }}</dd>
+        </dl>
+        <p>
+            <a href="{{ url('comment_index') }}" title="{{ 'Back to list'|trans }}">
+                {{ 'Back to list'|trans }}
+            </a>
+        </p>
+    {% else %}
+        <p>
+            {{ 'Item not found'|trans }}
+        </p>
+    {% endif %}
+{% endblock %}

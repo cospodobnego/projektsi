@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ 'Category list'|trans }}
+{% endblock %}
+
+{% block body %}
+    <h1>{{ 'Category list'|trans }}</h1>
+    {% if pagination is defined and pagination.items|length %}
+
+        <div class="navigation text-center">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>{{ knp_pagination_sortable(pagination, 'ID'|trans, 'category.id') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'Name'|trans, 'category.name') }}</th>
+                <th>{{ 'Actions'|trans }}</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for category in pagination.items %}
+                <tr>
+                    <td>{{ category.id }}</td>
+                    <td>{{ category.name }}</td>
+
+                    <td>
+                        <a href="{{ url('category_show', {id: category.id}) }}" title="{{ 'view'|trans }}">
+                            {{ 'view'|trans }}
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="navigation text-center">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+
+    {% else %}
+        <p>
+            {{ 'Empty list'|trans }}
+        </p>
+    {% endif %}
+{% endblock %}
+
+
