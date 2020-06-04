@@ -3,13 +3,19 @@
  * Post controller.
  */
 namespace App\Controller;
+use App\Entity\Category;
 use App\Entity\Post;
+use App\Form\CategoryType;
+use App\Form\PostType;
+use App\Repository\CategoryRepository;
 use Symfony\Component\HttpFoundation\Request;
 use App\Repository\PostRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use \Knp\Component\Pager\PaginatorInterface;
+
+
 /**
  * Class PostController.
  *
@@ -43,6 +49,7 @@ class PostController extends AbstractController
             ['pagination' => $pagination]
         );
     }
+
     /**
      * Show action.
      *
@@ -62,6 +69,128 @@ class PostController extends AbstractController
         return $this->render(
             'post/show.html.twig',
             ['post' => $post]
+        );
+    }
+    /**
+     * Create action.
+     *
+     * @param \Symfony\Component\HttpFoundation\Request $request            HTTP request
+     * @param \App\Repository\PostRepository        $postRepository Post repository
+     *
+     * @return \Symfony\Component\HttpFoundation\Response HTTP response
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     *
+     * @Route(
+     *     "/create",
+     *     methods={"GET", "POST"},
+     *     name="post_create",
+     * )
+     */
+    public function create(Request $request, PostRepository $postRepository): Response
+    {
+        $post = new Post();
+
+        $form = $this->createForm(PostType::class, $post);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $post->setDate(new \DateTime());
+            $postRepository->save($post);
+
+
+            $this->addFlash('success', 'Created successfully');
+            return $this->redirectToRoute('post_index');
+        }
+
+        return $this->render(
+            'post/create.html.twig',
+            ['form' => $form->createView()]
+        );
+    }
+    /**
+     * Edit action.
+     *
+     * @param \Symfony\Component\HttpFoundation\Request $request            HTTP request
+     * @param \App\Entity\Post                      $post           Post entity
+     * @param \App\Repository\PostRepository        $postRepository Post repository
+     *
+     * @return \Symfony\Component\HttpFoundation\Response HTTP response
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     *
+     * @Route(
+     *     "/{id}/edit",
+     *     methods={"GET", "PUT"},
+     *     requirements={"id": "[1-9]\d*"},
+     *     name="post_edit",
+     * )
+     */
+    public function edit(Request $request, Post $post, PostRepository $postRepository): Response
+    {
+        $form = $this->createForm(PostType::class, $post, ['method' => 'PUT']);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $post->setDate(new \DateTime());
+            $post->save($post);
+
+            $this->addFlash('success', 'updated successfully');
+
+            return $this->redirectToRoute('post_index');
+        }
+
+        return $this->render(
+            'post/edit.html.twig',
+            [
+                'form' => $form->createView(),
+                'post' => $post,
+            ]
+        );
+    }
+    /**
+     * Delete action.
+     *
+     * @param \Symfony\Component\HttpFoundation\Request $request            HTTP request
+     * @param \App\Entity\Post                      $post          Category entity
+     * @param \App\Repository\PostRepository        $postRepository Category repository
+     *
+     * @return \Symfony\Component\HttpFoundation\Response HTTP response
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     *
+     * @Route(
+     *     "/{id}/delete",
+     *     methods={"GET", "DELETE"},
+     *     requirements={"id": "[1-9]\d*"},
+     *     name="post_delete",
+     * )
+     */
+    public function delete(Request $request, Post $post, PostRepository $postRepository): Response
+    {
+        $form = $this->createForm(PostType::class, $post, ['method' => 'DELETE']);
+        $form->handleRequest($request);
+
+        if ($request->isMethod('DELETE') && !$form->isSubmitted()) {
+            $form->submit($request->request->get($form->getName()));
+        }
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $postRepository->delete($post);
+            $this->addFlash('success', 'deleted successfully');
+
+            return $this->redirectToRoute('post_index');
+        }
+
+        return $this->render(
+            'post/delete.html.twig',
+            [
+                'form' => $form->createView(),
+                'post' => $post,
+            ]
         );
     }
 }

@@ -18,7 +18,7 @@
                 <th>{{ knp_pagination_sortable(pagination, 'ID'|trans, 'comment.id') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'Date'|trans, 'comment.date') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'Text'|trans, 'comment.text') }}</th>
-                <th>{{ 'Post ID'|trans }}</th>
+                <th>{{ 'Post name'|trans }}</th>
                 <th>{{ 'Actions'|trans }}</th>
 
             </tr>
@@ -31,12 +31,27 @@
                     <td>{{ comment.text }}</td>
                     <td>
                         <a href="{{ url('post_show', {id: comment.post.id}) }}" title="{{ 'view post'|trans }}">
-                            {{ comment.post.id }}
+                            {{ comment.post.name }}
                         </a>
                     </td>
                     <td>
                         <a href="{{ url('comment_show', {id: comment.id}) }}" title="{{ 'view'|trans }}">
                             {{ 'view'|trans }}
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{{ url('comment_create', {id: comment.id}) }}" title="{{ 'create'|trans }}">
+                            {{ 'create'|trans }}
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{{ url('comment_edit', {id: comment.id}) }}" title="{{ 'edit'|trans }}">
+                            {{ 'edit'|trans }}
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{{ url('comment_delete', {id: comment.id}) }}" title="{{ 'delete'|trans }}">
+                            {{ 'delete'|trans }}
                         </a>
                     </td>
                 </tr>

@@ -41,6 +41,21 @@
                     {{ 'view'|trans }}
                 </a>
             </td>
+            <td>
+                <a href="{{ url('post_create', {id: post.id}) }}" title="{{ 'create'|trans }}">
+                    {{ 'create'|trans }}
+                </a>
+            </td>
+            <td>
+                <a href="{{ url('post_edit', {id: post.id}) }}" title="{{ 'edit'|trans }}">
+                    {{ 'edit'|trans }}
+                </a>
+            </td>
+            <td>
+                <a href="{{ url('post_delete', {id: post.id}) }}" title="{{ 'delete'|trans }}">
+                    {{ 'delete'|trans }}
+                </a>
+            </td>
         </tr>
     {% endfor %}
     </tbody>

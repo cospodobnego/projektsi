@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ 'Create tag'|trans }}
+{% endblock %}
+
+{% block body %}
+    <h1>{{ 'Create tag'|trans }}</h1>
+    {{ form_start(form, { method: 'POST', action: url('tag_create') }) }}
+    {{ form_widget(form) }}
+    <div class="form-group row float-sm-right">
+        <input type="submit" value="{{ 'save'|trans }}" class="btn btn-primary" />
+    </div>
+    <div class="form-group row float-sm-left">
+        <a href="{{ url('tag_index') }}" class="btn btn-link">
+            {{ 'Back to list'|trans }}
+        </a>
+    </div>
+    {{ form_end(form) }}
+{% endblock %}

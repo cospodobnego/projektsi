@@ -59,6 +59,31 @@ class PostRepository extends ServiceEntityRepository
     {
         return $queryBuilder ?? $this->createQueryBuilder('post');
     }
-
+    /**
+     * Save record.
+     *
+     * @param \App\Entity\Post $post Post entity
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function save(Post $post): void
+    {
+        $this->_em->persist($post);
+        $this->_em->flush($post);
+    }
+    /**
+     * Delete record.
+     *
+     * @param \App\Entity\Post $post Post entity
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function delete(Post $post): void
+    {
+        $this->_em->remove($post);
+        $this->_em->flush($post);
+    }
 }
 

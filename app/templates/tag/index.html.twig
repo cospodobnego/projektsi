@@ -31,6 +31,21 @@
                             {{ 'view'|trans }}
                         </a>
                     </td>
+                    <td>
+                        <a href="{{ url('tag_create', {id: tag.id}) }}" title="{{ 'create'|trans }}">
+                            {{ 'create'|trans }}
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{{ url('tag_edit', {id: tag.id}) }}" title="{{ 'edit'|trans }}">
+                            {{ 'edit'|trans }}
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{{ url('tag_delete', {id: tag.id}) }}" title="{{ 'delete'|trans }}">
+                            {{ 'delete'|trans }}
+                        </a>
+                    </td>
                 </tr>
             {% endfor %}
             </tbody>

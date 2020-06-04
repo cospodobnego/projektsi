@@ -4,6 +4,7 @@
  */
 namespace App\Controller;
 use App\Entity\Tag;
+use App\Form\TagType;
 use Symfony\Component\HttpFoundation\Request;
 use App\Repository\TagRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -64,4 +65,125 @@ class TagController extends AbstractController
             ['tag' => $tag]
         );
     }
+    /**
+     * Create action.
+     *
+     * @param \Symfony\Component\HttpFoundation\Request $request HTTP request
+     * @param \App\Repository\CommentRepository $commentRepository Comment repository
+     *
+     * @return \Symfony\Component\HttpFoundation\Response HTTP response
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     *
+     * @Route(
+     *     "/create",
+     *     methods={"GET", "POST"},
+     *     name="tag_create",
+     * )
+     */
+    public function create(Request $request, TagRepository $tagRepository): Response
+    {
+        $tag = new Tag();
+        $form = $this->createForm(TagType::class,$tag);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $tagRepository->save($tag);
+            $this->addFlash('success', 'Created successfully');
+
+            return $this->redirectToRoute('tag_index');
+        }
+
+        return $this->render(
+            'tag/create.html.twig',
+            ['form' => $form->createView()]
+        );
+    }
+    /**
+     * Edit action.
+     *
+     * @param \Symfony\Component\HttpFoundation\Request $request            HTTP request
+     * @param \App\Entity\Tag                     $tag       Tag entity
+     * @param \App\Repository\TagRepository        $tagRepository Tag repository
+     *
+     * @return \Symfony\Component\HttpFoundation\Response HTTP response
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     *
+     * @Route(
+     *     "/{id}/edit",
+     *     methods={"GET", "PUT"},
+     *     requirements={"id": "[1-9]\d*"},
+     *     name="tag_edit",
+     * )
+     */
+    public function edit(Request $request, Tag $tag, TagRepository $tagRepository): Response
+    {
+        $form = $this->createForm(TagType::class, $tag, ['method' => 'PUT']);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $tagRepository->save($tag);
+            $this->addFlash('success', 'updated successfully');
+
+            return $this->redirectToRoute('tag_index');
+        }
+
+        return $this->render(
+            'tag/edit.html.twig',
+            [
+                'form' => $form->createView(),
+                'tag' => $tag,
+            ]
+        );
+    }
+    /**
+     * Delete action.
+     *
+     * @param \Symfony\Component\HttpFoundation\Request $request            HTTP request
+     * @param \App\Entity\Tag                  $tag       Tag entity
+     * @param \App\Repository\TagRepository        $tagRepository Tag repository
+     *
+     * @return \Symfony\Component\HttpFoundation\Response HTTP response
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     *
+     * @Route(
+     *     "/{id}/delete",
+     *     methods={"GET", "DELETE"},
+     *     requirements={"id": "[1-9]\d*"},
+     *     name="tag_delete",
+     * )
+     */
+    public function delete(Request $request, Tag $tag, TagRepository $tagRepository): Response
+    {
+        $form = $this->createForm(TagType::class, $tag, ['method' => 'DELETE']);
+        $form->handleRequest($request);
+
+        if ($request->isMethod('DELETE') && !$form->isSubmitted()) {
+            $form->submit($request->request->get($form->getName()));
+        }
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $tagRepository->delete($tag);
+            $this->addFlash('success', 'deleted successfully');
+
+            return $this->redirectToRoute('tag_index');
+        }
+
+        return $this->render(
+            'tag/delete.html.twig',
+            [
+                'form' => $form->createView(),
+                'tag' => $tag,
+            ]
+        );
+    }
+
+
 }
