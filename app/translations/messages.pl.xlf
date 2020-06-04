@@ -1,0 +1,139 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="Actions">
+                <source>Actions</source>
+                <target>Działania</target>
+            </trans-unit>
+            <trans-unit id="ID">
+                <source>ID</source>
+                <target>ID</target>
+            </trans-unit>
+            <trans-unit id="Post list">
+                <source>Post list</source>
+                <target>Lista postów</target>
+            </trans-unit>
+            <trans-unit id="Date">
+                <source>Date</source>
+                <target>Data</target>
+            </trans-unit>
+            <trans-unit id="Name">
+                <source>Name</source>
+                <target>Nazwa</target>
+            </trans-unit>
+            <trans-unit id="Empty list">
+                <source>Empty list</source>
+                <target>Lista jest pusta.</target>
+            </trans-unit>
+            <trans-unit id="Text">
+                <source>Text</source>
+                <target>Tekst</target>
+            </trans-unit>
+            <trans-unit id="view">
+                <source>view</source>
+                <target>zobacz</target>
+            </trans-unit>
+            <trans-unit id="Category">
+                <source>Category</source>
+                <target>Kategoria</target>
+            </trans-unit>
+            <trans-unit id="Tag details">
+                <source>Tag details</source>
+                <target>Szczegóły tagu</target>
+            </trans-unit>
+            <trans-unit id="Post details">
+                <source>Post details</source>
+                <target>Szczegóły posta</target>
+            </trans-unit>
+            <trans-unit id="view category">
+                <source>view category</source>
+                <target>Zobacz kategorię</target>
+            </trans-unit>
+            <trans-unit id="Back to list">
+                <source>Back to list</source>
+                <target>Powróć do listy</target>
+            </trans-unit>
+            <trans-unit id="Item not found">
+                <source>Item not found</source>
+                <target>Nie znalezniono</target>
+            </trans-unit>
+            <trans-unit id="Category list">
+                <source>Category list</source>
+                <target>Lista kategorii</target>
+            </trans-unit>
+            <trans-unit id="Category details">
+                <source>Category details</source>
+                <target>Szczegóły kategorii</target>
+            </trans-unit>
+            <trans-unit id="Comment list">
+                <source>Comment list</source>
+                <target>Lista komentarzy</target>
+            </trans-unit>
+            <trans-unit id="Post ID">
+                <source>Post ID</source>
+                <target>Post ID</target>
+            </trans-unit>
+            <trans-unit id="view post">
+                <source>view post</source>
+                <target>zobacz post</target>
+            </trans-unit>
+            <trans-unit id="Comment details">
+                <source>Comment details</source>
+                <target>Szczegóły komentarza</target>
+            </trans-unit>
+            <trans-unit id="Tag list">
+                <source>Tag list</source>
+                <target>Lista tagów</target>
+            </trans-unit>
+            <trans-unit id="Category edit">
+                <source>Category edit</source>
+                <target>Edytuj kategorię</target>
+            </trans-unit>
+            <trans-unit id="save">
+                <source>save</source>
+                <target>zapisz</target>
+            </trans-unit>
+            <trans-unit id="Category delete">
+                <source>Category delete</source>
+                <target>Usuń kategorię</target>
+            </trans-unit>
+            <trans-unit id="delete">
+                <source>delete</source>
+                <target>usuń</target>
+            </trans-unit>
+            <trans-unit id="create">
+                <source>create</source>
+                <target>utwórz</target>
+            </trans-unit>
+            <trans-unit id="edit">
+                <source>edit</source>
+                <target>edytuj</target>
+            </trans-unit>
+            <trans-unit id="Create category">
+                <source>Create category</source>
+                <target>Utwórz kategorię</target>
+            </trans-unit>
+            <trans-unit id="posts">
+                <source>posts</source>
+                <target>posty</target>
+            </trans-unit>
+            <trans-unit id="comments">
+                <source>comments</source>
+                <target>komentarze</target>
+            </trans-unit>
+            <trans-unit id="categories">
+                <source>categories</source>
+                <target>kategorie</target>
+            </trans-unit>
+            <trans-unit id="tags">
+                <source>tags</source>
+                <target>tagi</target>
+            </trans-unit>
+            <trans-unit id="login">
+                <source>login</source>
+                <target>zaloguj się</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

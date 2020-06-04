@@ -9,6 +9,8 @@ services:
         volumes:
           - .docker/config/vhosts:/etc/apache2/sites-enabled
           - ./app:/home/wwwroot/sf
+          - ~/.composer/docker-cache/:/root/.composer:cached
+          -  .:/application:cached
         depends_on:
           - php
 
@@ -32,6 +34,8 @@ services:
         container_name: sf_php
         volumes:
           - ./app:/home/wwwroot/sf
+          - ~/.composer/docker-cache/:/root/.composer:cached
+          -  .:/application:cached
         environment:
           - maildev_host=sf_maildev
         depends_on:

@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ 'Tag list'|trans }}
+{% endblock %}
+
+{% block body %}
+    <h1>{{ 'Tag list'|trans }}</h1>
+    {% if pagination is defined and pagination.items|length %}
+
+        <div class="navigation text-center">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>{{ knp_pagination_sortable(pagination, 'ID'|trans, 'tag.id') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'Name'|trans, 'tag.name') }}</th>
+                <th>{{ 'Actions'|trans }}</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for tag in pagination.items %}
+                <tr>
+                    <td>{{ tag.id }}</td>
+                    <td>{{ tag.name }}</td>
+                    <td>
+                        <a href="{{ url('tag_show', {id: tag.id}) }}" title="{{ 'view'|trans }}">
+                            {{ 'view'|trans }}
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="navigation text-center">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+
+    {% else %}
+        <p>
+            {{ 'Empty list'|trans }}
+        </p>
+    {% endif %}
+{% endblock %}
+
+
