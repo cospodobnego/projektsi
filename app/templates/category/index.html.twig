@@ -43,9 +43,11 @@
                         </a>
                     </td>
                     <td>
-                        <a href="{{ url('category_delete', {id: category.id}) }}" title="{{ 'delete'|trans }}">
-                            {{ 'delete'|trans }}
-                        </a>
+                        {% if not category.posts|length %}
+                            <a href="{{ url('category_delete', {id: category.id}) }}" title="{{ 'delete'|trans }}">
+                                {{ 'delete'|trans }}
+                            </a>
+                        {% endif %}
                     </td>
                 </tr>
             {% endfor %}

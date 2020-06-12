@@ -8,11 +8,15 @@ use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Class Post.
  * @ORM\Entity(repositoryClass="App\Repository\PostRepository")
  * @ORM\Table(name="posts")
+ * @UniqueEntity(fields={"name"})
  */
 class Post
 {
@@ -30,41 +34,78 @@ class Post
      * Date.
      *
      * @var DateTimeInterface
-     *
      * @ORM\Column(type="datetime")
+     * @Assert\DateTime
+     *
+     * @Gedmo\Timestampable(on="create")
      */
     private $date;
 
     /**
-     * Name
+     * Name.
      *
      * @var string
      *
-     * @ORM\Column(type="string", length=45)
+     * @ORM\Column(
+     *     type="string",
+     *     length=45,
+     * )
+     * @Assert\Type(type="string")
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *     min="3",
+     *     max="45",
+     * )
+     *
      */
     private $name;
 
     /**
-     * Text
+     * Text.
      *
-     * @var text
-     * @ORM\Column(type="text")
+     * @var string
+     * @ORM\Column(
+     *     type="text",
+     *     length=65535,
+     *     )
+     * @Assert\Type(type="string")
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *     min="10",
+     *    max="65535",
+     * )
      */
     private $text;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="posts")
+     * Categories.
+     * @ORM\ManyToOne(
+     *     targetEntity="App\Entity\Category",
+     *      inversedBy="posts",
+     *     )
      * @ORM\JoinColumn(nullable=false)
      */
     private $category;
 
     /**
-     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="post")
+     * Comments.
+     * @var \Doctrine\Common\Collections\ArrayCollection|\App\Entity\Comment[] $comments Comments
+     * @ORM\OneToMany(
+     *     targetEntity="App\Entity\Comment",
+     *      mappedBy="post",
+     *     )
+     * @Assert\Type(type="Doctrine\Common\Collections\ArrayCollection")
      */
     private $comments;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Tag::class, inversedBy="posts")
+     * Tags.
+     * @var array
+     * @ORM\ManyToMany(
+     *     targetEntity="App\Entity\Tag",
+     *      inversedBy="posts",
+     *     orphanRemoval=true
+     * )
      * @ORM\JoinTable(name="posts_tags")
      */
     private $tag;

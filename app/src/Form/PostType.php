@@ -62,18 +62,18 @@ class PostType extends AbstractType
                 }
             ]
         );
-        $builder->add(
-            'tag',
-            EntityType::class,
-            [
-                'label' => 'tag',
-                'required' => true,
-                'class'=> Tag::class,
-                'choice_label'=> function($tag){
-                    return $tag->getName();
-                }
-            ]
-        );
+//        $builder->add(
+//            'tag',
+//            EntityType::class,
+//            [
+//                'label' => 'tag',
+//                'required' => true,
+//                'class'=> Tag::class,
+//                'choice_label'=> function($tag){
+//                    return $tag->getName();
+//                }
+//            ]
+//        );
     }
 
 

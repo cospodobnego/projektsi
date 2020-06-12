@@ -89,7 +89,7 @@ class CommentController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $comment->setDate(new \DateTime());
+//            $comment->setDate(new \DateTime());
             $commentRepository->save($comment);
             $this->addFlash('success', 'Created successfully');
 

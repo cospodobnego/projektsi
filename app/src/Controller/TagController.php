@@ -162,6 +162,11 @@ class TagController extends AbstractController
      */
     public function delete(Request $request, Tag $tag, TagRepository $tagRepository): Response
     {
+        if ($tag->getPosts()->count()) {
+            $this->addFlash('warning', 'message_tag_contains_posts');
+
+            return $this->redirectToRoute('tag_index');
+        }
         $form = $this->createForm(TagType::class, $tag, ['method' => 'DELETE']);
         $form->handleRequest($request);
 

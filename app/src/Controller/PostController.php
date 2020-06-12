@@ -135,7 +135,7 @@ class PostController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $post->setDate(new \DateTime());
-            $post->save($post);
+            $postRepository->save($post);
 
             $this->addFlash('success', 'updated successfully');
 

@@ -4,8 +4,12 @@
  */
 namespace App\Entity;
 
+use DateTimeInterface;
 use App\Repository\CommentRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  *  Class Comment.
@@ -30,21 +34,35 @@ class Comment
      * Date.
      *
      * @var DateTimeInterface
-     *
      * @ORM\Column(type="datetime")
+     * @Assert\DateTime
+     *
+     * @Gedmo\Timestampable(on="create")
      */
     private $date;
     /**
-     * Text
+     * Text.
      *
      * @var string
      * @ORM\Column(type="string", length=255)
+     * @Assert\Type(type="string")
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *     min="3",
+     *     max="255",
+     *
+     * )
      */
     private $text;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Post::class, inversedBy="comments")
+     * Posts.
+     * @ORM\ManyToOne(
+     *     targetEntity="App\Entity\Post",
+     *      inversedBy="comments")
      * @ORM\JoinColumn(nullable=false)
+     *
+     *
      */
     private $post;
 

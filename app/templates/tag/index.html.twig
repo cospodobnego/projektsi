@@ -37,13 +37,15 @@
                         </a>
                     </td>
                     <td>
-                        <a href="{{ url('tag_edit', {id: tag.id}) }}" title="{{ 'edit'|trans }}">
-                            {{ 'edit'|trans }}
-                        </a>
+                        {% if not tag.posts|length %}
+                            <a href="{{ url('tag_delete', {id: tag.id}) }}" title="{{ 'delete'|trans }}">
+                                {{ 'delete'|trans }}
+                            </a>
+                        {% endif %}
                     </td>
                     <td>
-                        <a href="{{ url('tag_delete', {id: tag.id}) }}" title="{{ 'delete'|trans }}">
-                            {{ 'delete'|trans }}
+                        <a href="{{ url('tag_edit', {id: tag.id}) }}" title="{{ 'edit'|trans }}">
+                            {{ 'edit'|trans }}
                         </a>
                     </td>
                 </tr>
