@@ -10,6 +10,8 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
+use Gedmo\Mapping\Annotation as Gedmo;
+
 /**
  * Class Tag.
  * @ORM\Entity(repositoryClass=TagRepository::class)
@@ -36,10 +38,7 @@ class Tag
      * @ORM\Column(type="string", length=255)
      * @Assert\Type(type="string")
      * @Assert\NotBlank
-     * @Assert\Regex(
-     *     pattern="/\d/",
-     *     match=false,
-     * )
+
      * @Assert\Length(
      *     min="3",
      *     max="255",
@@ -59,53 +58,106 @@ class Tag
      */
     private $posts;
 
+    /**
+     *  Code.
+     *
+     * @var string
+     *
+     * @ORM\Column(
+     *     type="string",
+     *     length=255,
+     * )
+     *
+     * @Assert\Type(type="string")
+     * @Assert\Length(
+     *     min="3",
+     *     max="255",
+     * )
+     *
+     * @Gedmo\Slug(fields={"name"})
+     */
+    private $code;
+
+    /**
+     * Tag constructor.
+     */
     public function __construct()
     {
         $this->posts = new ArrayCollection();
     }
 
+    /**
+     * Getter for Id.
+     *
+     * @return int|null Result
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
-
+    /**
+     * Getter for Name.
+     *
+     * @return string|null Name
+     */
     public function getName(): ?string
     {
         return $this->name;
     }
-
-    public function setName(string $name): self
+    /**
+     * Setter for Title.
+     *
+     * @param string $name Name
+     */
+    public function setName(string $name): void
     {
         $this->name = $name;
-
-        return $this;
     }
 
     /**
-     * @return Collection|Post[]
+     * Getter for tasks.
+     *
+     * @return \Doctrine\Common\Collections\Collection|\App\Entity\Post[] Posts collection
      */
     public function getPosts(): Collection
     {
         return $this->posts;
     }
-
-    public function addPost(Post $post): self
+    /**
+     * Add post to collection.
+     *
+     * @param \App\Entity\Post $post Post entity
+     */
+    public function addPost(Post $post): void
     {
         if (!$this->posts->contains($post)) {
             $this->posts[] = $post;
             $post->addTag($this);
         }
-
-        return $this;
     }
-
-    public function removePost(Post $post): self
+    /**
+     * Remove post from collection.
+     *
+     * @param \App\Entity\Post $post Post entity
+     */
+    public function removePost(Post $post): void
     {
         if ($this->posts->contains($post)) {
             $this->posts->removeElement($post);
             $post->removeTag($this);
         }
 
-        return $this;
+    }
+
+    public function getCode(): ?string
+    {
+        return $this->code;
+    }
+
+    public function setCode(string $code): void
+    {
+        $this->code = $code;
+
+
     }
 }

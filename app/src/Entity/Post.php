@@ -79,6 +79,8 @@ class Post
 
     /**
      * Categories.
+     *
+     * @var \App\Entity\Category Category
      * @ORM\ManyToOne(
      *     targetEntity="App\Entity\Category",
      *      inversedBy="posts",
@@ -93,8 +95,8 @@ class Post
      * @ORM\OneToMany(
      *     targetEntity="App\Entity\Comment",
      *      mappedBy="post",
+     *     orphanRemoval=true,
      *     )
-     * @Assert\Type(type="Doctrine\Common\Collections\ArrayCollection")
      */
     private $comments;
 
@@ -110,84 +112,134 @@ class Post
      */
     private $tag;
 
+    /**
+     * Post constructor
+     */
     public function __construct()
     {
         $this->comments = new ArrayCollection();
         $this->tag = new ArrayCollection();
     }
 
+    /**
+     * Getter for Id.
+     * @return int|null Result
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * Getter for Date.
+     * @return DateTimeInterface|null Date.
+     */
     public function getDate(): ?\DateTimeInterface
     {
         return $this->date;
     }
 
-    public function setDate(\DateTimeInterface $date): self
+    /**
+     * Setter for Date.
+    * @param \DateTimeInterface $date Date
+     */
+    public function setDate(\DateTimeInterface $date): void
     {
         $this->date = $date;
 
-        return $this;
+
     }
 
+    /**
+     * Getter for Name.
+     *
+     * @return string|null Name
+     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
-    public function setName(string $name): self
+    /**
+     * Setter for Name.
+     *
+     * @param string $name Name
+     *
+     */
+    public function setName(string $name): void
     {
         $this->name = $name;
 
-        return $this;
     }
 
+    /**
+     * Getter for Text.
+     *
+     * @return string|null
+     */
     public function getText(): ?string
     {
         return $this->text;
     }
 
-    public function setText(string $text): self
+    /**
+     * Setter for Text.
+     *
+     * @param string $text Text
+     *
+     */
+    public function setText(string $text): void
     {
         $this->text = $text;
-
-        return $this;
     }
 
+    /**
+     * Getter for category
+     *
+     * @return \App\Entity\Category|null Category
+     */
     public function getCategory(): ?Category
     {
         return $this->category;
     }
 
-    public function setCategory(?Category $category): self
+    /**
+     * Setter for category.
+     *
+     * @param \App\Entity\Category|null $category Category
+     */
+    public function setCategory(?Category $category): void
     {
         $this->category = $category;
-
-        return $this;
     }
 
     /**
-     * @return Collection|Comment[]
+     * Getter for comments.
+     * @return \Doctrine\Common\Collections\Collection|\App\Entity\Comment[] Comments collection
      */
     public function getComments(): Collection
     {
         return $this->comments;
     }
-
-    public function addComment(Comment $comment): self
+/**
+ *  Add comment to collection.
+ *
+ * @param \App\Entity\Comment $comment Comment entity
+ */
+    public function addComment(Comment $comment): void
     {
         if (!$this->comments->contains($comment)) {
             $this->comments[] = $comment;
             $comment->setPost($this);
         }
-
-        return $this;
     }
 
-    public function removeComment(Comment $comment): self
+/**
+ * Remove comment from collection.
+ *
+ * @param \App\Entity\Comment $comment Comment entity
+ */
+    public function removeComment(Comment $comment): void
     {
         if ($this->comments->contains($comment)) {
             $this->comments->removeElement($comment);
@@ -196,34 +248,40 @@ class Post
                 $comment->setPost(null);
             }
         }
-
-        return $this;
     }
 
     /**
-     * @return Collection|Tag[]
+     * Getter for tags.
+     *
+     * @return \Doctrine\Common\Collections\Collection|\App\Entity\Tag[] Tags collection
      */
     public function getTag(): Collection
     {
         return $this->tag;
     }
-
-    public function addTag(Tag $tag): self
+    /**
+     * Add tag to collection.
+     *
+     * @param \App\Entity\Tag $tag Tag entity
+     */
+    public function addTag(Tag $tag): void
     {
         if (!$this->tag->contains($tag)) {
             $this->tag[] = $tag;
         }
 
-        return $this;
     }
-
-    public function removeTag(Tag $tag): self
+    /**
+     * Remove tag from collection.
+     *
+     * @param \App\Entity\Tag $tag Tag entity
+     */
+    public function removeTag(Tag $tag): void
     {
         if ($this->tag->contains($tag)) {
             $this->tag->removeElement($tag);
         }
 
-        return $this;
     }
 
 

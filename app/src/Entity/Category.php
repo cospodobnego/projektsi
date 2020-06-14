@@ -110,11 +110,10 @@ class Category
      *
      * @param string $name Name
      */
-    public function setName(string $name): self
+    public function setName(string $name): void
     {
         $this->name = $name;
 
-        return $this;
     }
 
     /**
@@ -125,17 +124,16 @@ class Category
         return $this->posts;
     }
 
-    public function addPost(Post $post): self
+    public function addPost(Post $post): void
     {
         if (!$this->posts->contains($post)) {
             $this->posts[] = $post;
             $post->setCategory($this);
         }
 
-        return $this;
     }
 
-    public function removePost(Post $post): self
+    public function removePost(Post $post): void
     {
         if ($this->posts->contains($post)) {
             $this->posts->removeElement($post);
@@ -145,7 +143,6 @@ class Category
             }
         }
 
-        return $this;
     }
 
     public function getCode(): ?string
@@ -153,10 +150,10 @@ class Category
         return $this->code;
     }
 
-    public function setCode(string $code): self
+    public function setCode(string $code): void
     {
         $this->code = $code;
 
-        return $this;
+
     }
 }

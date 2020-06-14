@@ -5,8 +5,8 @@
 
 namespace App\Form;
 
-use App\Entity\Tag;
 use App\Entity\Post;
+use App\Form\DataTransformer\TagDataTransformer;
 use App\Entity\Category;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -16,9 +16,29 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Class PostType.
+ *
  */
 class PostType extends AbstractType
 {
+
+
+    /**
+     * Tag data transformer.
+     *
+     * @var \App\Form\DataTransformer\TagDataTransformer
+     */
+    private $tagDataTransformer;
+
+    /**
+     * TaskType constructor.
+     *
+     * @param \App\Form\DataTransformer\TagDataTransformer $tagDataTransformer Tag data transformer
+     */
+    public function __construct(TagDataTransformer $tagDataTransformer)
+    {
+        $this->tagDataTransformer = $tagDataTransformer;
+    }
+
     /**
      * Builds the form.
      *
@@ -62,18 +82,20 @@ class PostType extends AbstractType
                 }
             ]
         );
-//        $builder->add(
-//            'tag',
-//            EntityType::class,
-//            [
-//                'label' => 'tag',
-//                'required' => true,
-//                'class'=> Tag::class,
-//                'choice_label'=> function($tag){
-//                    return $tag->getName();
-//                }
-//            ]
-//        );
+        $builder->add(
+            'tag',
+          TextType::class,
+            [
+
+                'label' => 'tag',
+                'attr' => ['max_length' => 255],
+                'required' => false,
+
+            ]
+        );
+        $builder->get('tag')->addModelTransformer(
+            $this->tagDataTransformer
+        );
     }
 
 

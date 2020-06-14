@@ -15,7 +15,7 @@
 <table class="table table-striped">
     <thead>
     <tr>
-        <th>{{ knp_pagination_sortable(pagination, 'ID'|trans, 'post.id') }}</th>
+
         <th>{{ knp_pagination_sortable(pagination, 'Date'|trans, 'post.date') }}</th>
         <th>{{ knp_pagination_sortable(pagination, 'Name'|trans, 'post.name') }}</th>
         <th>{{ knp_pagination_sortable(pagination, 'Text'|trans, 'post.text') }}</th>
@@ -27,33 +27,30 @@
     <tbody>
     {% for post in pagination.items %}
         <tr>
-            <td>{{ post.id }}</td>
+
             <td>{{ post.date|format_date('long') }}</td>
             <td>{{ post.name }}</td>
             <td>{{ post.text }}</td>
             <td>
-                <a href="{{ url('category_show', {id: post.category.id}) }}" title="{{ 'view category'|trans }}">
+                <a href="{{ url('category_show', {id: post.category.id}) }}"  title="{{ 'view category'|trans }}">
                     {{ post.category.name }}
                 </a>
             </td>
             <td>
-                <a href="{{ url('post_show', {id: post.id}) }}" title="{{ 'view'|trans }}">
-                    {{ 'view'|trans }}
+                <a href="{{ url('post_show', {id: post.id}) }}"> <i class="fa fa-eye"></i>
+
                 </a>
             </td>
             <td>
-                <a href="{{ url('post_create', {id: post.id}) }}" title="{{ 'create'|trans }}">
-                    {{ 'create'|trans }}
+                <a href="{{ url('post_create', {id: post.id}) }}"> <i class="fa fa-plus"></i>
                 </a>
             </td>
             <td>
-                <a href="{{ url('post_edit', {id: post.id}) }}" title="{{ 'edit'|trans }}">
-                    {{ 'edit'|trans }}
+                <a href="{{ url('post_edit', {id: post.id}) }}"> <i class="fa fa-pencil-square-o"></i>
                 </a>
             </td>
             <td>
-                <a href="{{ url('post_delete', {id: post.id}) }}" title="{{ 'delete'|trans }}">
-                    {{ 'delete'|trans }}
+                <a href="{{ url('post_delete', {id: post.id}) }}"> <i class="fa fa-trash-o" > </i>
                 </a>
             </td>
         </tr>

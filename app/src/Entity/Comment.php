@@ -76,11 +76,10 @@ class Comment
         return $this->date;
     }
 
-    public function setDate(\DateTimeInterface $date): self
+    public function setDate(\DateTimeInterface $date): void
     {
         $this->date = $date;
 
-        return $this;
     }
 
     public function getText(): ?string
@@ -88,11 +87,11 @@ class Comment
         return $this->text;
     }
 
-    public function setText(string $text): self
+    public function setText(string $text): void
     {
         $this->text = $text;
 
-        return $this;
+
     }
 
     public function getPost(): ?Post
@@ -100,10 +99,9 @@ class Comment
         return $this->post;
     }
 
-    public function setPost(?Post $post): self
+    public function setPost(?Post $post): void
     {
         $this->post = $post;
 
-        return $this;
     }
 }

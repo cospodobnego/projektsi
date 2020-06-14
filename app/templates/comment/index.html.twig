@@ -15,7 +15,7 @@
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>{{ knp_pagination_sortable(pagination, 'ID'|trans, 'comment.id') }}</th>
+
                 <th>{{ knp_pagination_sortable(pagination, 'Date'|trans, 'comment.date') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'Text'|trans, 'comment.text') }}</th>
                 <th>{{ 'Post name'|trans }}</th>
@@ -26,7 +26,7 @@
             <tbody>
             {% for comment in pagination.items %}
                 <tr>
-                    <td>{{ comment.id }}</td>
+
                     <td>{{ comment.date|format_date('long') }}</td>
                     <td>{{ comment.text }}</td>
                     <td>
@@ -35,23 +35,22 @@
                         </a>
                     </td>
                     <td>
-                        <a href="{{ url('comment_show', {id: comment.id}) }}" title="{{ 'view'|trans }}">
-                            {{ 'view'|trans }}
+                        <a href="{{ url('comment_show', {id: comment.id}) }}" > <i class="fa fa-eye"></i>
                         </a>
                     </td>
                     <td>
-                        <a href="{{ url('comment_create', {id: comment.id}) }}" title="{{ 'create'|trans }}">
-                            {{ 'create'|trans }}
+                        <a href="{{ url('comment_create', {id: comment.id}) }}">
+                            <i class="fa fa-plus"></i>
                         </a>
                     </td>
                     <td>
-                        <a href="{{ url('comment_edit', {id: comment.id}) }}" title="{{ 'edit'|trans }}">
-                            {{ 'edit'|trans }}
+                        <a href="{{ url('comment_edit', {id: comment.id}) }}" >
+                            <i class="fa fa-pencil-square-o"></i>
                         </a>
                     </td>
                     <td>
-                        <a href="{{ url('comment_delete', {id: comment.id}) }}" title="{{ 'delete'|trans }}">
-                            {{ 'delete'|trans }}
+                        <a href="{{ url('comment_delete', {id: comment.id}) }}" >
+                            <i class="fa fa-trash-o" > </i>
                         </a>
                     </td>
                 </tr>
