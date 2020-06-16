@@ -5,6 +5,8 @@
 {% endblock %}
 
 {% block body %}
+    <div class="post_container container">
+
     <h1>{{ 'Delete Post'|trans({'%id%': post.id|default('')}) }}</h1>
     {{ form_start(form, { method: 'DELETE', action: url('post_delete', {id: post.id}) }) }}
     {{ form_widget(form) }}
@@ -17,4 +19,5 @@
         </a>
     </div>
     {{ form_end(form) }}
+    </div>
 {% endblock %}

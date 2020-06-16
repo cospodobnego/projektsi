@@ -8,6 +8,8 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Doctrine\ORM\ORMException;
+use Doctrine\ORM\OptimisticLockException;
 
 /**
  * @method User|null find($id, $lockMode = null, $lockVersion = null)
@@ -35,7 +37,19 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->_em->persist($user);
         $this->_em->flush();
     }
-
+    /**
+     * Save record.
+     *
+     * @param User $user
+     *
+     * @throws ORMException
+     * @throws OptimisticLockException
+     */
+    public function saveUser(User $user): void
+    {
+        $this->_em->persist($user);
+        $this->_em->flush($user);
+    }
     // /**
     //  * @return User[] Returns an array of User objects
     //  */

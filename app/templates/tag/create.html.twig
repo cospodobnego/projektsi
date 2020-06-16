@@ -5,6 +5,8 @@
 {% endblock %}
 
 {% block body %}
+    <div class="tag_container container">
+
     <h1>{{ 'Create tag'|trans }}</h1>
     {{ form_start(form, { method: 'POST', action: url('tag_create') }) }}
     {{ form_widget(form) }}
@@ -17,4 +19,5 @@
         </a>
     </div>
     {{ form_end(form) }}
+    </div>
 {% endblock %}

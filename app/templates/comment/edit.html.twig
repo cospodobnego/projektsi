@@ -5,6 +5,8 @@
 {% endblock %}
 
 {% block body %}
+    <div class="comment_container container">
+
     <h1>{{ 'Comment edit'|trans({'%id%': comment.id|default('')}) }}</h1>
     {{ form_start(form, { method: 'PUT', action: url('comment_edit', {id: comment.id}) }) }}
     {{ form_widget(form) }}
@@ -17,4 +19,5 @@
         </a>
     </div>
     {{ form_end(form) }}
+    </div>
 {% endblock %}

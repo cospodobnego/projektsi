@@ -5,7 +5,9 @@
 {% endblock %}
 
 {% block body %}
-    <h1>{{ 'Tag list'|trans }}</h1>
+<div class="tag_container container">
+
+<h1>{{ 'Tag list'|trans }}</h1>
     {% if pagination is defined and pagination.items|length %}
 
         <div class="navigation text-center">
@@ -57,6 +59,7 @@
             {{ 'Empty list'|trans }}
         </p>
     {% endif %}
+</div>
 {% endblock %}
 
 

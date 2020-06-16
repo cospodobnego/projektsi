@@ -5,6 +5,8 @@
 {% endblock %}
 
 {% block body %}
+    <div class="comment_container container">
+
     <h1>{{ 'Delete comment'|trans({'%id%': comment.id|default('')}) }}</h1>
     {{ form_start(form, { method: 'DELETE', action: url('comment_delete', {id: comment.id}) }) }}
     {{ form_widget(form) }}
@@ -17,4 +19,5 @@
         </a>
     </div>
     {{ form_end(form) }}
+    </div>
 {% endblock %}

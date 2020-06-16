@@ -5,6 +5,8 @@
 {% endblock %}
 
 {% block body %}
+    <div class="category_container container">
+
     <h1>{{ 'Category edit'|trans({'%id%': category.id|default('')}) }}</h1>
     {{ form_start(form, { method: 'PUT', action: url('category_edit', {id: category.id}) }) }}
     {{ form_widget(form) }}
@@ -17,4 +19,5 @@
         </a>
     </div>
     {{ form_end(form) }}
+    </div>
 {% endblock %}

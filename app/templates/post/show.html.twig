@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block body %}
+    <div class="post_container container">
     <h1>{{ 'Post details'|trans({'%id%': post.id|default('')}) }}</h1>
     {% if post is defined and post|length %}
         <dl class="dl-horizontal">
@@ -29,4 +30,6 @@
             {{ 'Item not found'|trans }}
         </p>
     {% endif %}
+    <div class="post_container container">
+
 {% endblock %}

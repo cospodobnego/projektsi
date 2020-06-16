@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block body %}
+<div class="post_container container">
     <h1>{{ 'Post list'|trans }}</h1>
 {% if pagination is defined and pagination.items|length %}
 
@@ -70,6 +71,7 @@
         } %}
     </p>
 {% endif %}
+</div>
 {% endblock %}
 
 

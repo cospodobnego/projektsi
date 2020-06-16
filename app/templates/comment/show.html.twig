@@ -5,6 +5,8 @@
 {% endblock %}
 
 {% block body %}
+    <div class="comment_container container">
+
     <h1>{{ 'Comment details'|trans({'%id%': comment.id|default('')}) }}</h1>
     {% if comment is defined and comment|length %}
         <dl class="dl-horizontal">
@@ -27,4 +29,5 @@
             {{ 'Item not found'|trans }}
         </p>
     {% endif %}
+    </div>
 {% endblock %}
