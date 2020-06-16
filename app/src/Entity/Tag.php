@@ -54,7 +54,7 @@ class Tag
      *      targetEntity="App\Entity\Post",
      *      mappedBy="tag")
      *
-     * @Assert\Type(type="Doctrine\Common\Collections\ArrayCollection")
+     *
      */
     private $posts;
 

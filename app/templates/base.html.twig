@@ -17,10 +17,12 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item active">
+
+                        <li class="nav-item">
                             <a class="nav-link" href="{{ url('post_index') }}">{{ 'posts'|trans }}</a>
 
                         </li>
+
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url('tag_index') }}">
                                 {{ 'tags'|trans }}</a>
@@ -31,9 +33,10 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url('category_index') }}">{{ 'categories'|trans }}</a>
                         </li>
+
                         <li class="nav-item">
                             {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                                {# <div>{{ app.user.firstName }}</div>#}
+
                                 <div>
                                     <a class="nav-link" href="{{ url('app_logout') }}">{{ 'logout'|trans }}</a>
                                 </div>
