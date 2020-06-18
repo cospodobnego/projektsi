@@ -134,7 +134,10 @@
                 <source>login</source>
                 <target>login</target>
             </trans-unit>
-
+            <trans-unit id="Post edit">
+                <source>Post edit</source>
+                <target>Post edit</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Exception\LogicException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -10,6 +11,12 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class SecurityController extends AbstractController
 {
     /**
+     * Login form action.
+     *
+     * @param AuthenticationUtils $authenticationUtils Auth utils
+     *
+     * @return Response HTTP response
+     *
      * @Route("/login", name="app_login")
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
@@ -27,6 +34,10 @@ class SecurityController extends AbstractController
     }
 
     /**
+     * Logout action
+     *
+     * @throws LogicException
+     *
      * @Route("/logout", name="app_logout")
      */
     public function logout()

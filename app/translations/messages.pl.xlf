@@ -134,6 +134,10 @@
                 <source>login</source>
                 <target>zaloguj się</target>
             </trans-unit>
+            <trans-unit id="Post edit">
+                <source>Post edit</source>
+                <target>Edytuj post</target>
+            </trans-unit>
 
         </body>
     </file>

@@ -17,7 +17,7 @@ use Doctrine\ORM\OptimisticLockException;
  * @method User[]    findAll()
  * @method User[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class UserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
+class UserRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
@@ -27,16 +27,16 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     /**
      * Used to upgrade (rehash) the user's password automatically over time.
      */
-    public function upgradePassword(UserInterface $user, string $newEncodedPassword): void
-    {
-        if (!$user instanceof User) {
-            throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', \get_class($user)));
-        }
-
-        $user->setPassword($newEncodedPassword);
-        $this->_em->persist($user);
-        $this->_em->flush();
-    }
+//    public function upgradePassword(UserInterface $user, string $newEncodedPassword): void
+//    {
+//        if (!$user instanceof User) {
+//            throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', \get_class($user)));
+//        }
+//
+//        $user->setPassword($newEncodedPassword);
+//        $this->_em->persist($user);
+//        $this->_em->flush();
+//    }
     /**
      * Save record.
      *

@@ -8,18 +8,12 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @ORM\Table(
- *     name="users",
- *     uniqueConstraints={
- *          @ORM\UniqueConstraint(
- *              name="email_idx",
- *              columns={"email"},
- *          )
- *     }
- * )
+ *     name="users")
  *
  * @UniqueEntity(fields={"email"})
  */
@@ -46,10 +40,8 @@ class User implements UserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(
-     *     name="id",
      *     type="integer",
-     *     nullable=false,
-     *     options={"unsigned"=true},
+     *
      * )
      */
     private $id;
@@ -61,9 +53,11 @@ class User implements UserInterface
      *
      * @ORM\Column(
      *     type="string",
-     *     length=180,
-     *     unique=true,
+     *     length=255,
+     *
      * )
+     * @Assert\NotBlank
+     * @Assert\Email
      */
     private $email;
 
@@ -79,7 +73,14 @@ class User implements UserInterface
      *
      * @var string
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(
+     *     type="string",
+     *     length=200,)
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *     min="6",
+     *     max="255",
+     * )
      */
     private $password;
 
@@ -186,6 +187,9 @@ class User implements UserInterface
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
     }
+
+
+
 
 
 }

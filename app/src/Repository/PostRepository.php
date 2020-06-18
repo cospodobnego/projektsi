@@ -26,7 +26,7 @@ class PostRepository extends ServiceEntityRepository
      *
      * @constant int
      */
-    const PAGINATOR_ITEMS_PER_PAGE = 4;
+    const PAGINATOR_ITEMS_PER_PAGE = 10;
     /**
      * PostRepository constructor.
      *
