@@ -5,6 +5,7 @@
 
 namespace App\Form;
 
+use App\Entity\Comment;
 use App\Entity\Post;
 use App\Form\DataTransformer\TagDataTransformer;
 use App\Entity\Category;
@@ -71,6 +72,11 @@ class PostType extends AbstractType
 
             ]
         );
+        $builder->add('comment', EntityType::class, [
+            'class' => Comment::class,
+            'label' => 'post_comment',
+            'choice_label' => 'name',
+        ]);
         $builder->add(
             'category',
            EntityType::class,

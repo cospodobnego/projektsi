@@ -5,9 +5,12 @@
 namespace App\Repository;
 
 use App\Entity\Comment;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\QueryBuilder;
+use Knp\Component\Pager\PaginatorInterface;
+
 /**
  * Class PostRepository
  * @method Comment|null find($id, $lockMode = null, $lockVersion = null)
@@ -47,7 +50,22 @@ class CommentRepository extends ServiceEntityRepository
         return $this->getOrCreateQueryBuilder()
             ->orderBy('comment.date', 'DESC');
     }
+    /**
+     * Query comments by author.
+     *
+     * @param \App\Entity\User $user User entity
+     *
+     * @return \Doctrine\ORM\QueryBuilder Query builder
+     */
+    public function queryByAuthor(User $user): QueryBuilder
+    {
+        $queryBuilder = $this->queryAll();
 
+        $queryBuilder->andWhere('comment.author = :author')
+            ->setParameter('author', $user);
+
+        return $queryBuilder;
+    }
     /**
      * Get or create new query builder.
      *
@@ -59,6 +77,8 @@ class CommentRepository extends ServiceEntityRepository
     {
         return $queryBuilder ?? $this->createQueryBuilder('comment');
     }
+
+
     /**
      * Save record.
      *

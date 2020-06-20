@@ -20,7 +20,10 @@
 
                 <th>{{ knp_pagination_sortable(pagination, 'Date'|trans, 'comment.date') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'Text'|trans, 'comment.text') }}</th>
+                <th>{{ 'comment_author'|trans }}</th>
                 <th>{{ 'Post name'|trans }}</th>
+
+
                 <th>{{ 'Actions'|trans }}</th>
 
             </tr>
@@ -31,6 +34,8 @@
 
                     <td>{{ comment.date|format_date('long') }}</td>
                     <td>{{ comment.text }}</td>
+                    <td>{{ comment.author.email}}</td>
+
                     <td>
                         <a href="{{ url('post_show', {id: comment.post.id}) }}" title="{{ 'view post'|trans }}">
                             {{ comment.post.name }}
@@ -40,21 +45,28 @@
                         <a href="{{ url('comment_show', {id: comment.id}) }}" > <i class="fa fa-eye"></i>
                         </a>
                     </td>
+                    {% if is_granted('CREATE', comment) %}
                     <td>
                         <a href="{{ url('comment_create', {id: comment.id}) }}">
                             <i class="fa fa-plus"></i>
                         </a>
                     </td>
+                    {% endif %}
+                    {% if is_granted('EDIT', comment) %}
                     <td>
                         <a href="{{ url('comment_edit', {id: comment.id}) }}" >
                             <i class="fa fa-pencil-square-o"></i>
                         </a>
                     </td>
+                    {% endif %}
+                    {% if is_granted('DELETE', comment) %}
                     <td>
                         <a href="{{ url('comment_delete', {id: comment.id}) }}" >
                             <i class="fa fa-trash-o" > </i>
                         </a>
                     </td>
+                    {% endif %}
+
                 </tr>
             {% endfor %}
             </tbody>

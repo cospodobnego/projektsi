@@ -43,6 +43,8 @@ class PostFixtures extends AbstractBaseFixtures implements DependentFixtureInter
             foreach ($tags as $tag) {
                 $post->addTag($tag);
             }
+            $post->setAuthor($this->getRandomReference('admins'));
+
             return $post;
         });
 
@@ -58,6 +60,6 @@ class PostFixtures extends AbstractBaseFixtures implements DependentFixtureInter
      */
     public function getDependencies(): array
     {
-        return [CategoryFixtures::class];
+        return [CategoryFixtures::class, TagFixtures::class, UserFixtures::class];
     }
 }

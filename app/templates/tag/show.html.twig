@@ -10,8 +10,6 @@
     <h1>{{ 'Tag details'|trans({'%id%': tag.id|default('')}) }}</h1>
     {% if tag is defined and tag|length %}
         <dl class="dl-horizontal">
-            <dt>{{ 'ID'|trans }}</dt>
-            <dd>{{ tag.id }}</dd>
             <dt>{{ 'Name'|trans }}</dt>
             <dd>{{  tag.name }}</dd>
 

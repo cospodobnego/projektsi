@@ -113,6 +113,16 @@ class Post
     private $tag;
 
     /**
+     * Authors.
+     * @var \App\Entity\User
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $author;
+
+
+    /**
      * Post constructor
      */
     public function __construct()
@@ -283,6 +293,19 @@ class Post
         }
 
     }
+
+    public function getAuthor(): ?User
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?User $author): self
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+
 
 
 }

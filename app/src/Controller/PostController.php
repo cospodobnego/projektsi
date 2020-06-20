@@ -14,6 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use \Knp\Component\Pager\PaginatorInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 
 /**
@@ -49,7 +50,33 @@ class PostController extends AbstractController
             ['pagination' => $pagination]
         );
     }
+    /**
+     * My posts action.
+     *
+     * @param \Symfony\Component\HttpFoundation\Request $request HTTP request
+     *
+     * @return \Symfony\Component\HttpFoundation\Response HTTP response
+     *
+     * @Route(
+     *     "/myposts",
+     *     methods={"GET"},
+     *     name="post_myposts",
+     * )
+     */
+    public function myPosts(Request $request,PostRepository $postRepository, PaginatorInterface $paginator): Response
+    {
+        $pagination = $paginator->paginate(
+            $postRepository->queryByAuthor($this->getUser()),
+            $request->query->getInt('page', 1),
+            PostRepository::PAGINATOR_ITEMS_PER_PAGE
+        );
 
+
+        return $this->render(
+            'post/myposts.html.twig',
+            ['pagination' => $pagination]
+        );
+    }
     /**
      * Show action.
      *
@@ -63,6 +90,7 @@ class PostController extends AbstractController
      *     name="post_show",
      *     requirements={"id": "[1-9]\d*"},
      * )
+     *
      */
     public function show(Post $post): Response
     {
@@ -87,6 +115,10 @@ class PostController extends AbstractController
      *     methods={"GET", "POST"},
      *     name="post_create",
      * )
+     * @IsGranted(
+     *     "CREATE",
+     *     subject="post",
+     * )
      */
     public function create(Request $request, PostRepository $postRepository): Response
     {
@@ -96,6 +128,7 @@ class PostController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $post->setAuthor($this->getUser());
             $post->setDate(new \DateTime());
             $postRepository->save($post);
 
@@ -126,6 +159,10 @@ class PostController extends AbstractController
      *     methods={"GET", "PUT"},
      *     requirements={"id": "[1-9]\d*"},
      *     name="post_edit",
+     * )
+     * @IsGranted(
+     *     "EDIT",
+     *     subject="post",
      * )
      */
     public function edit(Request $request, Post $post, PostRepository $postRepository): Response
@@ -167,6 +204,10 @@ class PostController extends AbstractController
      *     methods={"GET", "DELETE"},
      *     requirements={"id": "[1-9]\d*"},
      *     name="post_delete",
+     * )
+     * @IsGranted(
+     *     "DELETE",
+     *     subject="post",
      * )
      */
     public function delete(Request $request, Post $post, PostRepository $postRepository): Response

@@ -10,12 +10,13 @@
     <h1>{{ 'Comment details'|trans({'%id%': comment.id|default('')}) }}</h1>
     {% if comment is defined and comment|length %}
         <dl class="dl-horizontal">
-            <dt>{{ 'ID'|trans }}</dt>
-            <dd>{{ comment.id }}</dd>
+
             <dt>{{ 'Date'|trans }}</dt>
             <dd>{{ comment.date|date('Y/m/d') }}</dd>
             <dt>{{ 'Text'|trans }}</dt>
             <dd>{{  comment.text }}</dd>
+            <dt>{{ 'comment_author'|trans }}</dt>
+            <dd>{{  comment.author.email }}</dd>
             <dt>{{ 'Post ID'|trans }}</dt>
             <dd>{{  comment.post.id }}</dd>
         </dl>

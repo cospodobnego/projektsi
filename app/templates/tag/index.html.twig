@@ -31,20 +31,26 @@
 
                         </a>
                     </td>
+                    {% if is_granted('CREATE', tag) %}
                     <td>
                         <a href="{{ url('tag_create', {id: tag.id}) }}" > <i class="fa fa-plus"></i>
                         </a>
                     </td>
+                    {% endif %}
+                    {% if is_granted('DELETE', tag) %}
                     <td>
                         {% if not tag.posts|length %}
                             <a href="{{ url('tag_delete', {id: tag.id}) }}" > <i class="fa fa-trash-o" > </i>
                             </a>
                         {% endif %}
                     </td>
+                    {% endif %}
+                    {% if is_granted('EDIT', tag) %}
                     <td>
                         <a href="{{ url('tag_edit', {id: tag.id}) }}" > <i class="fa fa-pencil-square-o"></i>
                         </a>
                     </td>
+                    {% endif %}
                 </tr>
             {% endfor %}
             </tbody>

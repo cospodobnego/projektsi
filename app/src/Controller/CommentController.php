@@ -5,12 +5,15 @@
 namespace App\Controller;
 use App\Entity\Comment;
 use App\Form\CommentType;
-use Symfony\Component\HttpFoundation\Request;
 use App\Repository\CommentRepository;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use \Knp\Component\Pager\PaginatorInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+
+
 /**
  * Class CommentController.
  *
@@ -81,6 +84,10 @@ class CommentController extends AbstractController
      *     methods={"GET", "POST"},
      *     name="comment_create",
      * )
+     * @IsGranted(
+     *     "CREATE",
+     *     subject="comment",
+     * )
      */
     public function create(Request $request, CommentRepository $commentRepository): Response
     {
@@ -90,6 +97,7 @@ class CommentController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 //            $comment->setDate(new \DateTime());
+            $comment->setAuthor($this->getUser());
             $commentRepository->save($comment);
             $this->addFlash('success', 'Created successfully');
 
@@ -118,6 +126,10 @@ class CommentController extends AbstractController
      *     methods={"GET", "PUT"},
      *     requirements={"id": "[1-9]\d*"},
      *     name="comment_edit",
+     * )
+     * @IsGranted(
+     *     "EDIT",
+     *     subject="comment",
      * )
      */
     public function edit(Request $request, Comment $comment, CommentRepository $commentRepository): Response
@@ -159,6 +171,10 @@ class CommentController extends AbstractController
      *     requirements={"id": "[1-9]\d*"},
      *     name="comment_delete",
      * )
+     * @IsGranted(
+     *     "DELETE",
+     *     subject="comment",
+     * )
      */
     public function delete(Request $request, Comment $comment, CommentRepository $commentRepository): Response
     {
@@ -182,6 +198,33 @@ class CommentController extends AbstractController
                 'form' => $form->createView(),
                 'comment' => $comment,
             ]
+        );
+    }
+    /**
+     * My comments action.
+     *
+     * @param \Symfony\Component\HttpFoundation\Request $request HTTP request
+     *
+     * @return \Symfony\Component\HttpFoundation\Response HTTP response
+     *
+     * @Route(
+     *     "/comments",
+     *     methods={"GET"},
+     *     name="comment_mycomments",
+     * )
+     */
+    public function myComments(Request $request,CommentRepository $commentRepository, PaginatorInterface $paginator): Response
+    {
+        $pagination = $paginator->paginate(
+            $commentRepository->queryByAuthor($this->getUser()),
+            $request->query->getInt('page', 1),
+            CommentRepository::PAGINATOR_ITEMS_PER_PAGE
+        );
+
+
+        return $this->render(
+            'comment/mycomments.html.twig',
+            ['pagination' => $pagination]
         );
     }
 }
