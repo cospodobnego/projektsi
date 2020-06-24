@@ -198,9 +198,9 @@
                 <source>user_email</source>
                 <target>email użytkownika</target>
             </trans-unit>
-            <trans-unit id="user_email:">
-                <source>user_email:</source>
-                <target>email użytkownika:</target>
+            <trans-unit id="user_data">
+                <source>user_data</source>
+                <target>dane użytkownika</target>
             </trans-unit>
             <trans-unit id="view_posts">
                 <source>view_posts</source>

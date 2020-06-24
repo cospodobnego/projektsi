@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    {{ 'user_email'|trans}}
+    {{ 'user_data'|trans}}
 {% endblock %}
 
 {% block body %}
-    <div class="user_container container">
+    <div class="user_container containercol text-center ">
         {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-            <h1>{{ 'user_email:'|trans }}</h1>
+            <h1>{{ 'user_data'|trans }}</h1>
             <h2 >{{ user.email}}</h2>
         {% if is_granted('ROLE_ADMIN') %}
             <a href="{{ url('post_myposts') }}"  title="{{ 'view_posts'|trans }}">

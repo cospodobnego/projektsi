@@ -16,13 +16,13 @@
     {% endif %}
 {% if pagination is defined and pagination.items|length %}
 
-<div class="navigation text-center">
+<div class="pagination justify-content-end" aria-label="Page navigation">
     {{ knp_pagination_render(pagination) }}
 </div>
 
 
-    <table class="table table-striped">
-    <thead>
+    <table class="table table-hover table-light">
+    <thead class="thead-dark">
     <tr>
 
         <th>{{ knp_pagination_sortable(pagination, 'Date'|trans, 'post.date') }}</th>
@@ -74,7 +74,7 @@
     </tbody>
 </table>
 
-    <div class="navigation text-center">
+    <div class="pagination justify-content-end" aria-label="Page navigation">
         {{ knp_pagination_render(pagination) }}
     </div>
 

@@ -8,7 +8,7 @@ namespace App\Controller;
 use App\Entity\Comment;
 use App\Entity\Post;
 use App\Form\CommentType;
-use App\Repository\CommentRepository;
+use App\Service\CommentService;
 use Knp\Component\Pager\PaginatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -25,6 +25,22 @@ use Symfony\Component\Form\Extension\Core\Type\FormType;
 class CommentController extends AbstractController
 {
     /**
+     * Comment Service.
+     *
+     * @var \App\Service\CommentService
+     */
+    private $commentService;
+
+    /**
+     * CommentsController constructor.
+     *
+     * @param \App\Service\CommentService $commentService Category service
+     */
+    public function __construct(CommentService $commentService)
+    {
+        $this->commentService = $commentService;
+    }
+    /**
      * Index action.
      *
      * @param \Symfony\Component\HttpFoundation\Request $request           HTTP request
@@ -38,13 +54,11 @@ class CommentController extends AbstractController
      *     name="comment_index",
      * )
      */
-    public function index(Request $request, CommentRepository $commentRepository, PaginatorInterface $paginator): Response
+    public function index(Request $request): Response
     {
-        $pagination = $paginator->paginate(
-            $commentRepository->queryAll(),
-            $request->query->getInt('page', 1),
-            CommentRepository::PAGINATOR_ITEMS_PER_PAGE
-        );
+        $page = $request->query->getInt('page', 1);
+        $pagination = $this->commentService->createPaginatedList($page);
+
 
         return $this->render(
             'comment/index.html.twig',
@@ -78,7 +92,6 @@ class CommentController extends AbstractController
      * Create action.
      *
      * @param \Symfony\Component\HttpFoundation\Request $request           HTTP request
-     * @param \App\Repository\CommentRepository         $commentRepository Comment repository
      * @param \App\Entity\Post                          $post    Post entity
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
@@ -96,7 +109,7 @@ class CommentController extends AbstractController
      *
      * )
      */
-    public function create(Request $request, CommentRepository $commentRepository, Post $post): Response
+    public function create(Request $request, Post $post): Response
     {
         $comment = new Comment();
         $form = $this->createForm(CommentType::class, $comment);
@@ -106,8 +119,8 @@ class CommentController extends AbstractController
 
             $comment->setAuthor($this->getUser());
             $comment->setPost($post);
-            $commentRepository->save($comment);
-            $this->addFlash('success', 'Created successfully');
+            $this->commentService->save($comment);
+            $this->addFlash('success', 'created_successfully');
 
             return $this->redirectToRoute('post_show',['id' => $post->getId()]);
         }
@@ -143,16 +156,18 @@ class CommentController extends AbstractController
      *     subject="comment",
      * )
      */
-    public function edit(Request $request, Comment $comment, CommentRepository $commentRepository): Response
+    public function edit(Request $request, Comment $comment): Response
     {
         $form = $this->createForm(CommentType::class, $comment, ['method' => 'PUT']);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $commentRepository->save($comment);
-            $this->addFlash('success', 'updated successfully');
+        if ($form->isSubmitted() && $form->isValid())
 
-            return $this->redirectToRoute('post_index');
+        {
+            $this->commentService->save($comment);
+            $this->addFlash('success', 'updated_successfully');
+
+            return $this->redirectToRoute('post_show',['id' => $comment->getPost()->getId()]);
         }
 
         return $this->render(
@@ -187,7 +202,7 @@ class CommentController extends AbstractController
      *     subject="comment",
      * )
      */
-    public function delete(Request $request, Comment $comment, CommentRepository $commentRepository): Response
+    public function delete(Request $request, Comment $comment): Response
     {
         $form = $this->createForm(FormType::class, $comment, ['method' => 'DELETE']);
         $form->handleRequest($request);
@@ -197,10 +212,11 @@ class CommentController extends AbstractController
         }
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $commentRepository->delete($comment);
+            $postId = $comment->getPost()->getId();
+            $this->commentService->delete($comment);
             $this->addFlash('success', 'deleted successfully');
 
-            return $this->redirectToRoute('post_index');
+            return $this->redirectToRoute('post_show',['id' => $postId]);
         }
 
         return $this->render(
@@ -216,7 +232,7 @@ class CommentController extends AbstractController
      * My comments action.
      *
      * @param \Symfony\Component\HttpFoundation\Request $request           HTTP request
-     * @param \App\Repository\CommentRepository         $commentRepository Comment repository
+     *
      * @param \Knp\Component\Pager\PaginatorInterface   $paginator         Paginator
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
@@ -227,13 +243,11 @@ class CommentController extends AbstractController
      *     name="comment_mycomments",
      * )
      */
-    public function myComments(Request $request, CommentRepository $commentRepository, PaginatorInterface $paginator): Response
+    public function myComments(Request $request): Response
     {
-        $pagination = $paginator->paginate(
-            $commentRepository->queryByAuthor($this->getUser()),
-            $request->query->getInt('page', 1),
-            CommentRepository::PAGINATOR_ITEMS_PER_PAGE
-        );
+        $user = $this->getUser();
+        $page = $request->query->getInt('page', 1);
+        $pagination = $this->commentService->createPaginatedList1($page, $user);
 
         return $this->render(
             'comment/mycomments.html.twig',

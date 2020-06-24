@@ -6,7 +6,7 @@
 namespace App\Form\DataTransformer;
 
 use App\Entity\Tag;
-use App\Repository\TagRepository;
+use App\Service\TagService;
 use Symfony\Component\Form\DataTransformerInterface;
 
 /**
@@ -15,20 +15,20 @@ use Symfony\Component\Form\DataTransformerInterface;
 class TagDataTransformer implements DataTransformerInterface
 {
     /**
-     * Tag repository.
+     * Tag serivice.
      *
-     * @var \App\Repository\TagRepository
+     * @var \App\Service\TagService
      */
-    private $repository;
+    private $tagService;
 
     /**
      * TagsDataTransformer constructor.
      *
-     * @param \App\Repository\TagRepository $repository Tag repository
+     * @param \App\Service\TagService $tagService Tag service
      */
-    public function __construct(TagRepository $repository)
+    public function __construct(TagService $tagService)
     {
-        $this->repository = $repository;
+        $this->tagService = $tagService;
     }
 
     /**
@@ -71,11 +71,11 @@ class TagDataTransformer implements DataTransformerInterface
 
         foreach ($tagNames as $tagName) {
             if ('' !== trim($tagName)) {
-                $tag = $this->repository->findOneByName(strtolower($tagName));
+                $tag = $this->tagService->findOneByName(strtolower($tagName));
                 if (null === $tag) {
                     $tag = new Tag();
                     $tag->setName($tagName);
-                    $this->repository->save($tag);
+                    $this->tagService->save($tag);
                 }
                 $tags[] = $tag;
             }

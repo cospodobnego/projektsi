@@ -12,12 +12,12 @@
         </div>
     {% if pagination is defined and pagination|length %}
 
-        <div class="navigation text-center">
+        <div class="pagination justify-content-center" aria-label="Page navigation">
             {{ knp_pagination_render(pagination) }}
         </div>
 
-        <table class="table table-striped">
-            <thead>
+        <table class="table table-hover table-light">
+            <thead class="thead-dark">
             <tr>
 
                 <th>{{ knp_pagination_sortable(pagination, 'user.email'|trans, 'user.email') }}</th>
@@ -33,12 +33,12 @@
                     <td>{{ user.email }}</td>
                     <td>
                         <a class="btn btn-sm btn-primary mt-3 btn-dark"  href="{{ url('user_changemail', {id: user.id} )}}" title="{{ 'change_email'|trans }}">
-                            {{ 'change_email'|trans   }}
+                            <i class="fa fa-pencil-square-o"></i>
                         </a>
                     </td>
                     <td>
                         <a class="btn btn-sm btn-primary mt-3 btn-dark" href="{{ url('user_change' , {id: user.id} ) }}" title="{{ 'change_password'|trans }}">
-                            {{ 'change_password'|trans }}
+                            <i class="fa fa-pencil-square-o"></i>
                         </a>
                     </td>
                 </tr>
@@ -46,7 +46,7 @@
             </tbody>
         </table>
 
-        <div class="navigation text-center">
+        <div class="pagination justify-content-center" aria-label="Page navigation">
             {{ knp_pagination_render(pagination) }}
         </div>
 {% endif %}

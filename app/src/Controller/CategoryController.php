@@ -56,7 +56,7 @@ class CategoryController extends AbstractController
      */
     public function index(Request $request): Response
     {
-        $page = $request->query->getInt('page');
+        $page = $request->query->getInt('page', 1);
         $pagination = $this->categoryService->createPaginatedList($page);
 
         return $this->render(

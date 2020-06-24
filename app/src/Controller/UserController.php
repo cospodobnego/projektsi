@@ -8,7 +8,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\UserEmailType;
 use App\Form\UserPasswordType;
-use App\Repository\UserRepository;
+use App\Service\UserService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,12 +24,37 @@ use Knp\Component\Pager\PaginatorInterface;
 class UserController extends AbstractController
 {
     /**
+     * User Service.
+     *
+     * @var \App\Service\UserService
+     */
+    private $userService;
+    /**
+     * Password encoder.
+     *
+     * @var \Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface
+     */
+    private $passwordEncoder;
+
+    /**
+     * UserController constructor.
+     *
+     * @param \App\Service\UserService                                              $userService     User service
+     * @param \Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface $passwordEncoder Password encoder
+     */
+    public function __construct(UserService $userService, UserPasswordEncoderInterface $passwordEncoder)
+    {
+        $this->userService = $userService;
+        $this->passwordEncoder = $passwordEncoder;
+    }
+    /**
      * Index action.
      *
      * @Route("/user_index", name="user_index")
      *
      * @IsGranted("ROLE_USER")
      */
+
     public function index(): Response
     {
         $userEmail = $this->getUser();
@@ -53,13 +78,10 @@ class UserController extends AbstractController
      *
      * @IsGranted("ROLE_ADMIN")
      */
-    public function Userlist(Request $request, UserRepository $userrepository,PaginatorInterface $paginator): Response
+    public function Userlist(Request $request): Response
     {
-        $pagination = $paginator->paginate(
-            $userrepository->queryAll(),
-            $request->query->getInt('page', 1),
-            UserRepository::PAGINATOR_ITEMS_PER_PAGE
-        );
+        $page = $request->query->getInt('page', 1);
+        $pagination = $this->userService->createPaginatedList($page);
 
 
         return $this->render(
@@ -90,7 +112,7 @@ class UserController extends AbstractController
      *
      * @IsGranted("ROLE_USER")
      */
-    public function edit(Request $request, User $user, UserPasswordEncoderInterface $passwordEncoder, UserRepository $userRepository): Response
+    public function edit(Request $request, User $user, UserPasswordEncoderInterface $passwordEncoder): Response
     {
         $form = $this->createForm(UserPasswordType::class, $user, ['method' => 'PUT']);
         $form->handleRequest($request);
@@ -99,7 +121,7 @@ class UserController extends AbstractController
             $password = $passwordEncoder->encodePassword($user, $user->getPassword());
             $user->setPassword($password);
 
-            $userRepository->saveUser($user);
+            $this->userService->save($user);
             $this->addFlash('success', 'message.updated_successfully');
 
             return $this->redirectToRoute('post_index');
@@ -132,12 +154,12 @@ class UserController extends AbstractController
      *
      * @IsGranted("ROLE_USER")
      */
-    public function editemail(Request $request, User $user, UserRepository $userRepository)
+    public function editemail(Request $request, User $user)
     {
         $form = $this->createForm(UserEmailType::class, $user, ['method' => 'PUT']);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $userRepository->saveUser($user);
+            $this->userService->save($user);
             $this->addFlash('success', 'message.changed_successfully');
 
             return $this->redirectToRoute('post_index');
