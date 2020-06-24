@@ -15,12 +15,23 @@
             <dd>{{ post.date|date('Y/m/d') }}</dd>
             <dt>{{ 'Category'|trans }}</dt>
             <dd>{{  post.category.name }}</dd>
+            <dt>{{ 'tags'|trans }}</dt>
+            <dd>{% if post.tag is defined and post.tag|length %}
+                    {% for tag in post.tag %}
+                        <a href="{{ url('post_index', {'filters' : {'tag' : tag.id}}) }}" title="{{ tag.name }}">
+                            {{ tag.name }}
+                        </a>
+                    {% endfor %}
+                {% else %}
+                    &nbsp;
+                {% endif %}</dd>
             <dt>{{ 'Name'|trans }}</dt>
             <dd>{{ post.name }}</dd>
             <dt>{{ 'Text'|trans }}</dt>
             <dd>{{  post.text }}</dd>
             <dt>{{ 'Post_author'|trans }}</dt>
             <dd>{{  post.author.email }}</dd>
+
     <p>
         <a href="{{ url('post_index') }}" title="{{ 'Back to list'|trans }}">
             {{ 'Back to list'|trans }}

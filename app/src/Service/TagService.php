@@ -95,4 +95,15 @@ class TagService
     {
         $this->tagRepository->delete($tag);
     }
+    /**
+     * Find tag by Id.
+     *
+     * @param int $id Tag Id
+     *
+     * @return \App\Entity\Tag|null Tag entity
+     */
+    public function findOneById(int $id): ?Tag
+    {
+        return $this->tagRepository->findOneById($id);
+    }
 }

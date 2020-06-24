@@ -30,9 +30,15 @@
         <th>{{ 'Text'|trans }}</th>
         <th>{{ 'post_author'|trans }}</th>
         <th>{{ 'Category'|trans }}</th>
+        <th>{{ 'tag'|trans }}</th>
         <th>{{ 'view'|trans }}</th>
+        {% if is_granted('ROLE_ADMIN') %}
         <th>{{ 'edit'|trans }}</th>
+        {% endif %}
+        {% if is_granted('ROLE_ADMIN') %}
         <th>{{ 'delete'|trans }}</th>
+        {% endif %}
+
     </tr>
     </thead>
     <tbody>
@@ -43,10 +49,22 @@
             <td>{{ post.name }}</td>
             <td>{{ post.text }}</td>
             <td>{{ post.author.email }}</td>
+
             <td>
-                <a href="{{ url('category_show', {id: post.category.id}) }}"  title="{{ 'view category'|trans }}">
+                <a href="{{ url('post_index', {'filters' : {'category' : post.category.id}}) }}" title="{{ post.category.name }}">
                     {{ post.category.name }}
                 </a>
+            </td>
+            <td>
+                {% if post.tag is defined and post.tag|length %}
+                    {% for tag in post.tag %}
+                        <a href="{{ url('post_index', {'filters' : {'tag' : tag.id}}) }}" title="{{ tag.name }}">
+                            {{ tag.name }}
+                        </a>
+                    {% endfor %}
+                {% else %}
+                    &nbsp;
+                {% endif %}
             </td>
 
             <td>
@@ -54,7 +72,6 @@
 
                 </a>
             </td>
-
 
             {% if is_granted('EDIT', post) %}
 
@@ -69,8 +86,12 @@
                 </a>
             </td>
             {% endif %}
+
+
+
         </tr>
     {% endfor %}
+
     </tbody>
 </table>
 

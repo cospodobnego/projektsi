@@ -56,8 +56,12 @@ class PostController extends AbstractController
      */
     public function index(Request $request): Response
     {
-        $page = $request->query->getInt('page', 1);
-        $pagination = $this->postService->createPaginatedList($page);
+//        $page = $request->query->getInt('page', 1);
+//        $pagination = $this->postService->createPaginatedList($page);
+        $pagination = $this->postService->createPaginatedList(
+            $request->query->getInt('page', 1),
+            $request->query->getAlnum('filters', [])
+        );
 
         return $this->render(
             'post/index.html.twig',

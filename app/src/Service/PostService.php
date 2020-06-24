@@ -63,20 +63,21 @@ class PostService
     /**
      * Create paginated list.
      *
-     * @param int   $page    Page number
-     * @param array $filters Filters array
+     * @param int                                                 $page    Page number
+     * @param array                                               $filters Filters array
      *
      * @return \Knp\Component\Pager\Pagination\PaginationInterface Paginated list
      */
-    public function createPaginatedList(int $page): PaginationInterface
+    public function createPaginatedList(int $page, array $filters = []): PaginationInterface
     {
+        $filters = $this->prepareFilters($filters);
+
         return $this->paginator->paginate(
-            $this->postRepository->queryAll(),
+            $this->postRepository->queryAll($filters),
             $page,
             PostRepository::PAGINATOR_ITEMS_PER_PAGE
         );
     }
-
     /**
      * Show user's posts list.
      *
@@ -118,5 +119,34 @@ class PostService
     public function delete(Post $post): void
     {
         $this->postRepository->delete($post);
+    }
+
+    /**
+     * Prepare filters for the posts list.
+     *
+     * @param array $filters Raw filters from request
+     *
+     * @return array Result array of filters
+     */
+    private function prepareFilters(array $filters): array
+    {
+        $resultFilters = [];
+        if (isset($filters['category']) && is_numeric($filters['category'])) {
+            $category = $this->categoryService->findOneById(
+                $filters['category']
+            );
+            if (null !== $category) {
+                $resultFilters['category'] = $category;
+            }
+        }
+
+        if (isset($filters['tag']) && is_numeric($filters['tag'])) {
+            $tag = $this->tagService->findOneById($filters['tag']);
+            if (null !== $tag) {
+                $resultFilters['tag'] = $tag;
+            }
+        }
+
+        return $resultFilters;
     }
 }

@@ -26,9 +26,12 @@
             <tr>
                 <th>{{ knp_pagination_sortable(pagination, 'Name'|trans, 'tag.name') }}</th>
                 <th>{{ 'view'|trans }}</th>
+                {% if is_granted('ROLE_ADMIN') %}
                 <th>{{ 'delete'|trans }}</th>
+                {% endif %}
+                {% if is_granted('ROLE_ADMIN') %}
                 <th>{{ 'edit'|trans }}</th>
-
+                {% endif %}
 
             </tr>
             </thead>
