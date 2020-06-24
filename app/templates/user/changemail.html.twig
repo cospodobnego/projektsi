@@ -1,0 +1,10 @@
+{% include 'default/_form.html.twig' with {
+    page_title: 'title_user.email_edit'|trans,
+
+    attr: {
+        method: 'PUT',
+        action: url('user_changemail', {'id': user.id}),
+    },
+    form: form,
+    back_to_list_path: 'user_index',
+} %}

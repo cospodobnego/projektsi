@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {% if page_title_param is defined %}{{ page_title|trans(page_title_param) }}{% else %}{{ page_title|trans }}{% endif %}
+{% endblock %}
+
+{% block body %}
+
+
+    {{ form_start(form, { method: attr.method|default('POST'), action: attr.action }) }}
+    {% if false == form.vars.valid %}
+        {% include 'default/_single_flash_message.html.twig' with {
+            type: 'danger',
+            message: 'message_form_error'|trans,
+        }%}
+    {% endif %}
+
+    <div class="form_container container col text-center">
+        <div class="header">
+            <h1>
+                {% if page_title_param is defined %}{{ page_title|trans(page_title_param) }}{% else %}{{ page_title|trans }}{% endif %}
+            </h1>
+        </div>
+        {{ form_widget(form) }}
+        <div class="form-group mt-3 text-center m-auto">
+            <input type="submit" value="{{ submit_label|default('action_save'|trans) }}" class="btn btn-lg btn-dark mt-3" />
+
+            {% if back_to_list_path|default(false) %}
+
+            <a class="btn btn-lg btn-dark mt-3" href="{{ url(back_to_list_path) }}" class="btn btn-link">
+                {{ 'action_back_to_list'|trans }}
+            </a>
+        </div>
+        {% endif %}
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

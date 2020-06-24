@@ -1,0 +1,10 @@
+{% include 'default/_form.html.twig' with {
+    page_title: 'title_user.password_edit'|trans,
+    page_title_param: {'%id%': app.user.id},
+    attr: {
+        method: 'PUT',
+        action: url('user_change', {'id': app.user.id}),
+    },
+    form: form,
+    back_to_list_path: 'user_index',
+} %}

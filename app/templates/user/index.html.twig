@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ 'user_email'|trans}}
+{% endblock %}
+
+{% block body %}
+    <div class="user_container container">
+        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+            <h1>{{ 'user_email:'|trans }}</h1>
+            <h2 >{{ user.email}}</h2>
+        {% if is_granted('ROLE_ADMIN') %}
+            <a href="{{ url('post_myposts') }}"  title="{{ 'view_posts'|trans }}">
+                <h2 >{{ 'my_posts'|trans}}</h2>
+            </a>
+        {% endif %}
+            {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                <a href="{{ url('comment_mycomments') }}"  title="{{ 'view_comments'|trans }}">
+                    <h2 >{{ 'my_comments'|trans}}</h2>
+                </a>
+            {% endif %}
+
+            <a class="btn btn-lg btn-primary mt-3 btn-dark" href="{{ url('user_change', {id: app.user.id}) }}" title="{{ 'action_change_password'|trans }}">
+                {{ 'edit_password_label'|trans }}
+            </a>
+            <a class="btn btn-lg btn-primary mt-3 btn-dark" href="{{ url('user_changemail', {id: app.user.id}) }}" title="{{ 'action_change_email'|trans }}">
+                {{ 'edit_mail_label'|trans }}
+            </a>
+        {% endif %}
+        {% if is_granted('ROLE_ADMIN') %}
+            <a class="btn btn-lg btn-primary mt-3 btn-dark" href="{{ url('user_admin_panel') }}" title="{{ 'action_users'|trans }}">
+                {{ 'see_users'|trans }}
+            </a>
+        {% endif %}
+
+    </div>
+{% endblock %}

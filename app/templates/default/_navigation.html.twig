@@ -1,0 +1,56 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light static-top mb-5 shadow">
+    <div class="container">
+        <a class="navbar-brand" href="{{ url('post_index') }}">BLOG</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('post_index') }}">{{ 'posts'|trans }}</a>
+
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('tag_index') }}">
+                        {{ 'tags'|trans }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('comment_index') }}">{{ 'comments'|trans }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('category_index') }}">{{ 'categories'|trans }}</a>
+                </li>
+                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                    <li class="nav-item">
+                        <div>
+                            <a class="nav-link" href="{{ url('user_index') }}">{{ 'my_acount'|trans }}</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <div>
+                            <a class="nav-link" href="{{ url('app_logout') }}">{{ 'logout'|trans }}</a>
+                        </div>
+                    </li>
+
+                {% else %}
+                    <li class="nav-item">
+
+                        <div>
+                            <a class="nav-link" href="{{ url('app_login') }}">{{ 'login'|trans }}</a>
+                        </div>
+
+                    </li>
+                    <li class="nav-item">
+
+                        <div>
+                            <a class="nav-link" href="{{ url('app_register') }}">{{ 'register'|trans }}</a>
+                        </div>
+
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>

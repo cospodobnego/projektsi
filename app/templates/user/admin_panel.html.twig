@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ 'users_list'|trans }}
+{% endblock %}
+
+{% block body %}
+    <div class="user_cointainer container">
+    {% if is_granted('ROLE_ADMIN') %}
+        <div class="col text-center">
+    <h1>{{ 'users_list'|trans }}</h1>
+        </div>
+    {% if pagination is defined and pagination|length %}
+
+        <div class="navigation text-center">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+
+        <table class="table table-striped">
+            <thead>
+            <tr>
+
+                <th>{{ knp_pagination_sortable(pagination, 'user.email'|trans, 'user.email') }}</th>
+                <th>{{ 'change_user_email'|trans }}</th>
+                <th>{{ 'change_user_password'|trans }}</th>
+
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for user in pagination %}
+                <tr>
+                    <td>{{ user.email }}</td>
+                    <td>
+                        <a class="btn btn-sm btn-primary mt-3 btn-dark"  href="{{ url('user_changemail', {id: user.id} )}}" title="{{ 'change_email'|trans }}">
+                            {{ 'change_email'|trans   }}
+                        </a>
+                    </td>
+                    <td>
+                        <a class="btn btn-sm btn-primary mt-3 btn-dark" href="{{ url('user_change' , {id: user.id} ) }}" title="{{ 'change_password'|trans }}">
+                            {{ 'change_password'|trans }}
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="navigation text-center">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+{% endif %}
+    {% else %}
+        <p>
+            {{ 'message.empty_list'|trans }}
+        </p>
+    {% endif %}
+    </div>
+{% endblock %}
