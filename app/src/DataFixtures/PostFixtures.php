@@ -9,25 +9,18 @@ use App\Entity\Post;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-
 /**
- * Class PostFixtures
+ * Class PostFixtures.
  */
-
 class PostFixtures extends AbstractBaseFixtures implements DependentFixtureInterface
-
 {
     /**
      * Load data.
      *
      * @param \Doctrine\Persistence\ObjectManager $manager Persistence object manager
      */
-
     public function loadData(ObjectManager $manager): void
     {
-
-
-
         $this->createMany(50, 'posts', function ($i) {
             $post = new Post();
             $post->setName($this->faker->word);
@@ -48,10 +41,9 @@ class PostFixtures extends AbstractBaseFixtures implements DependentFixtureInter
             return $post;
         });
 
-
-
         $manager->flush();
     }
+
     /**
      * This method must return an array of fixtures classes
      * on which the implementing class depends on.

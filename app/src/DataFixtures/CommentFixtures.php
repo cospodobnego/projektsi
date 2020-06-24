@@ -6,8 +6,8 @@
 namespace App\DataFixtures;
 
 use App\Entity\Comment;
-use Doctrine\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
+use Doctrine\Persistence\ObjectManager;
 
 /**
  * Class CommentFixtures.
@@ -26,14 +26,14 @@ class CommentFixtures extends AbstractBaseFixtures implements DependentFixtureIn
             $comment->setDate($this->faker->dateTimeBetween('-100 days', '-1 days'));
             $comment->setText($this->faker->sentence);
             $comment->setPost($this->getRandomReference('posts'));
-            $comment->setAuthor($this->getRandomReference('users','admins'));
-
+            $comment->setAuthor($this->getRandomReference('users', 'admins'));
 
             return $comment;
         });
 
         $manager->flush();
     }
+
     /**
      * This method must return an array of fixtures classes
      * on which the implementing class depends on.

@@ -2,6 +2,7 @@
 /**
  * Post repository.
  */
+
 namespace App\Repository;
 
 use App\Entity\Post;
@@ -9,8 +10,10 @@ use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\QueryBuilder;
+
 /**
- * Class PostRepository
+ * Class PostRepository.
+ *
  * @method Post|null find($id, $lockMode = null, $lockVersion = null)
  * @method Post|null findOneBy(array $criteria, array $orderBy = null)
  * @method Post[]    findAll()
@@ -28,6 +31,7 @@ class PostRepository extends ServiceEntityRepository
      * @constant int
      */
     const PAGINATOR_ITEMS_PER_PAGE = 10;
+
     /**
      * PostRepository constructor.
      *
@@ -54,6 +58,7 @@ class PostRepository extends ServiceEntityRepository
 
         return $queryBuilder;
     }
+
     /**
      * Query all records.
      *
@@ -76,6 +81,7 @@ class PostRepository extends ServiceEntityRepository
     {
         return $queryBuilder ?? $this->createQueryBuilder('post');
     }
+
     /**
      * Save record.
      *
@@ -89,6 +95,7 @@ class PostRepository extends ServiceEntityRepository
         $this->_em->persist($post);
         $this->_em->flush($post);
     }
+
     /**
      * Delete record.
      *
@@ -103,4 +110,3 @@ class PostRepository extends ServiceEntityRepository
         $this->_em->flush($post);
     }
 }
-

@@ -2,14 +2,15 @@
 /**
  * Category entity.
  */
+
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
-use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Class Category.
@@ -57,14 +58,14 @@ class Category
     /**
      * Posts.
      *
-     * @var \Doctrine\Common\Collections\ArrayCollection|\App\Entity\Post[] $posts Posts
+     * @var \Doctrine\Common\Collections\ArrayCollection|\App\Entity\Post[] Posts
      *
      * @ORM\OneToMany(
      *     targetEntity="App\Entity\Post",
      *      mappedBy="category",
      *     )
      *
-     * @Assert\Type(type="Doctrine\Common\Collections\ArrayCollection")
+     *
      */
     private $posts;
 
@@ -86,6 +87,7 @@ class Category
     {
         $this->posts = new ArrayCollection();
     }
+
     /**
      * Getter for Id.
      *
@@ -105,6 +107,7 @@ class Category
     {
         return $this->name;
     }
+
     /**
      * Setter for Name.
      *
@@ -113,10 +116,11 @@ class Category
     public function setName(string $name): void
     {
         $this->name = $name;
-
     }
 
     /**
+     * Getter for Posts.
+     *
      * @return Collection|Post[]
      */
     public function getPosts(): Collection
@@ -130,7 +134,6 @@ class Category
             $this->posts[] = $post;
             $post->setCategory($this);
         }
-
     }
 
     public function removePost(Post $post): void
@@ -142,7 +145,6 @@ class Category
                 $post->setCategory(null);
             }
         }
-
     }
 
     public function getCode(): ?string
@@ -153,7 +155,5 @@ class Category
     public function setCode(string $code): void
     {
         $this->code = $code;
-
-
     }
 }

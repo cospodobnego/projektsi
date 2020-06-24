@@ -5,10 +5,10 @@
 
 namespace App\Form;
 
+use App\Entity\Category;
 use App\Entity\Comment;
 use App\Entity\Post;
 use App\Form\DataTransformer\TagDataTransformer;
-use App\Entity\Category;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -18,12 +18,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Class PostType.
- *
  */
 class PostType extends AbstractType
 {
-
-
     /**
      * Tag data transformer.
      *
@@ -32,7 +29,7 @@ class PostType extends AbstractType
     private $tagDataTransformer;
 
     /**
-     * TaskType constructor.
+     * PostType constructor.
      *
      * @param \App\Form\DataTransformer\TagDataTransformer $tagDataTransformer Tag data transformer
      */
@@ -58,7 +55,7 @@ class PostType extends AbstractType
             'name',
             TextType::class,
             [
-                'label' => 'name',
+                'label' => 'Name',
                 'required' => true,
                 'attr' => ['max_length' => 64],
             ]
@@ -67,44 +64,36 @@ class PostType extends AbstractType
             'text',
             TextareaType::class,
             [
-                'label' => 'text',
+                'label' => 'Text',
                 'required' => true,
-
             ]
         );
-        $builder->add('comment', EntityType::class, [
-            'class' => Comment::class,
-            'label' => 'post_comment',
-            'choice_label' => 'name',
-        ]);
+
         $builder->add(
             'category',
-           EntityType::class,
+            EntityType::class,
             [
-                'label' => 'category',
+                'label' => 'Category',
                 'required' => true,
-                'class'=> Category::class,
-                'choice_label'=> function($category){
+                'class' => Category::class,
+                'choice_label' => function ($category) {
                     return $category->getName();
-                }
+                },
             ]
         );
         $builder->add(
             'tag',
-          TextType::class,
+            TextType::class,
             [
-
                 'label' => 'tag',
                 'attr' => ['max_length' => 255],
                 'required' => false,
-
             ]
         );
         $builder->get('tag')->addModelTransformer(
             $this->tagDataTransformer
         );
     }
-
 
     /**
      * Configures the options for this type.

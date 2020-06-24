@@ -2,6 +2,7 @@
 /**
  * Post entity.
  */
+
 namespace App\Entity;
 
 use DateTimeInterface;
@@ -9,19 +10,22 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class Post.
+ *
  * @ORM\Entity(repositoryClass="App\Repository\PostRepository")
  * @ORM\Table(name="posts")
+ *
  * @UniqueEntity(fields={"name"})
  */
 class Post
 {
     /**
      * Primary key.
+     *
      * @var int
      *
      * @ORM\Id()
@@ -34,7 +38,9 @@ class Post
      * Date.
      *
      * @var DateTimeInterface
+     *
      * @ORM\Column(type="datetime")
+     *
      * @Assert\DateTime
      *
      * @Gedmo\Timestampable(on="create")
@@ -56,7 +62,6 @@ class Post
      *     min="3",
      *     max="45",
      * )
-     *
      */
     private $name;
 
@@ -64,6 +69,7 @@ class Post
      * Text.
      *
      * @var string
+     *
      * @ORM\Column(
      *     type="text",
      *     length=65535,
@@ -81,6 +87,7 @@ class Post
      * Categories.
      *
      * @var \App\Entity\Category Category
+     *
      * @ORM\ManyToOne(
      *     targetEntity="App\Entity\Category",
      *      inversedBy="posts",
@@ -91,7 +98,9 @@ class Post
 
     /**
      * Comments.
-     * @var \Doctrine\Common\Collections\ArrayCollection|\App\Entity\Comment[] $comments Comments
+     *
+     * @var \Doctrine\Common\Collections\ArrayCollection|\App\Entity\Comment[] Comments
+     *
      * @ORM\OneToMany(
      *     targetEntity="App\Entity\Comment",
      *      mappedBy="post",
@@ -102,7 +111,9 @@ class Post
 
     /**
      * Tags.
+     *
      * @var array
+     *
      * @ORM\ManyToMany(
      *     targetEntity="App\Entity\Tag",
      *      inversedBy="posts",
@@ -114,6 +125,7 @@ class Post
 
     /**
      * Authors.
+     *
      * @var \App\Entity\User
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
@@ -121,9 +133,8 @@ class Post
      */
     private $author;
 
-
     /**
-     * Post constructor
+     * Post constructor.
      */
     public function __construct()
     {
@@ -133,6 +144,7 @@ class Post
 
     /**
      * Getter for Id.
+     *
      * @return int|null Result
      */
     public function getId(): ?int
@@ -142,7 +154,8 @@ class Post
 
     /**
      * Getter for Date.
-     * @return DateTimeInterface|null Date.
+     *
+     * @return DateTimeInterface|null date
      */
     public function getDate(): ?\DateTimeInterface
     {
@@ -151,13 +164,12 @@ class Post
 
     /**
      * Setter for Date.
-    * @param \DateTimeInterface $date Date
+     *
+     * @param \DateTimeInterface $date Date
      */
     public function setDate(\DateTimeInterface $date): void
     {
         $this->date = $date;
-
-
     }
 
     /**
@@ -174,18 +186,16 @@ class Post
      * Setter for Name.
      *
      * @param string $name Name
-     *
      */
     public function setName(string $name): void
     {
         $this->name = $name;
-
     }
 
     /**
      * Getter for Text.
      *
-     * @return string|null
+     * @return string|null Name
      */
     public function getText(): ?string
     {
@@ -196,7 +206,6 @@ class Post
      * Setter for Text.
      *
      * @param string $text Text
-     *
      */
     public function setText(string $text): void
     {
@@ -204,9 +213,9 @@ class Post
     }
 
     /**
-     * Getter for category
+     * Getter for category.
      *
-     * @return \App\Entity\Category|null Category
+     * @return Category|null Category
      */
     public function getCategory(): ?Category
     {
@@ -216,7 +225,7 @@ class Post
     /**
      * Setter for category.
      *
-     * @param \App\Entity\Category|null $category Category
+     * @param Category $category Category
      */
     public function setCategory(?Category $category): void
     {
@@ -225,17 +234,19 @@ class Post
 
     /**
      * Getter for comments.
-     * @return \Doctrine\Common\Collections\Collection|\App\Entity\Comment[] Comments collection
+     *
+     * @return Collection| Comment[]
      */
     public function getComments(): Collection
     {
         return $this->comments;
     }
-/**
- *  Add comment to collection.
- *
- * @param \App\Entity\Comment $comment Comment entity
- */
+
+    /**
+     *  Add comment to collection.
+     *
+     * @param Comment $comment Comment
+     */
     public function addComment(Comment $comment): void
     {
         if (!$this->comments->contains($comment)) {
@@ -244,11 +255,11 @@ class Post
         }
     }
 
-/**
- * Remove comment from collection.
- *
- * @param \App\Entity\Comment $comment Comment entity
- */
+    /**
+     * Remove comment from collection.
+     *
+     * @param Comment $comment Comment
+     */
     public function removeComment(Comment $comment): void
     {
         if ($this->comments->contains($comment)) {
@@ -263,49 +274,54 @@ class Post
     /**
      * Getter for tags.
      *
-     * @return \Doctrine\Common\Collections\Collection|\App\Entity\Tag[] Tags collection
+     * @return Collection|Tag[]
      */
     public function getTag(): Collection
     {
         return $this->tag;
     }
+
     /**
      * Add tag to collection.
      *
-     * @param \App\Entity\Tag $tag Tag entity
+     * @param Tag $tag Tag
      */
     public function addTag(Tag $tag): void
     {
         if (!$this->tag->contains($tag)) {
             $this->tag[] = $tag;
         }
-
     }
+
     /**
      * Remove tag from collection.
      *
-     * @param \App\Entity\Tag $tag Tag entity
+     * @param Tag $tag Tag
      */
     public function removeTag(Tag $tag): void
     {
         if ($this->tag->contains($tag)) {
             $this->tag->removeElement($tag);
         }
-
     }
 
+    /**
+     * Getter for author.
+     *
+     * @return User[]|null User
+     */
     public function getAuthor(): ?User
     {
         return $this->author;
     }
 
-    public function setAuthor(?User $author): self
+    /**
+     * Setter for category.
+     *
+     * @param User $author User
+     */
+    public function setAuthor(?User $author): void
     {
         $this->author = $author;
-
-        return $this;
     }
-
-
-
 }

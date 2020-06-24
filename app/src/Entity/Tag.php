@@ -2,18 +2,20 @@
 /**
  * Tag entity.
  */
+
 namespace App\Entity;
 
 use App\Repository\TagRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
-use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Class Tag.
+ *
  * @ORM\Entity(repositoryClass=TagRepository::class)
  * @ORM\Table(name="tags")
  *
@@ -34,8 +36,11 @@ class Tag
 
     /**
      * Name.
+     *
      * @var string
+     *
      * @ORM\Column(type="string", length=255)
+     *
      * @Assert\Type(type="string")
      * @Assert\NotBlank
 
@@ -47,14 +52,13 @@ class Tag
     private $name;
 
     /**
-     * Posts
-     * @var \Doctrine\Common\Collections\ArrayCollection|\App\Entity\Post[] $posts Posts
+     * Posts.
+     *
+     * @var \Doctrine\Common\Collections\ArrayCollection|\App\Entity\Post[] Posts
      *
      * @ORM\ManyToMany(
      *      targetEntity="App\Entity\Post",
      *      mappedBy="tag")
-     *
-     *
      */
     private $posts;
 
@@ -95,6 +99,7 @@ class Tag
     {
         return $this->id;
     }
+
     /**
      * Getter for Name.
      *
@@ -104,6 +109,7 @@ class Tag
     {
         return $this->name;
     }
+
     /**
      * Setter for Title.
      *
@@ -123,6 +129,7 @@ class Tag
     {
         return $this->posts;
     }
+
     /**
      * Add post to collection.
      *
@@ -135,6 +142,7 @@ class Tag
             $post->addTag($this);
         }
     }
+
     /**
      * Remove post from collection.
      *
@@ -146,7 +154,6 @@ class Tag
             $this->posts->removeElement($post);
             $post->removeTag($this);
         }
-
     }
 
     public function getCode(): ?string
@@ -157,7 +164,5 @@ class Tag
     public function setCode(string $code): void
     {
         $this->code = $code;
-
-
     }
 }

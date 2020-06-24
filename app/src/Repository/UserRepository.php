@@ -4,12 +4,10 @@ namespace App\Repository;
 
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
-use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
-use Doctrine\ORM\ORMException;
 use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
+use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\QueryBuilder;
 
 /**
  * @method User|null find($id, $lockMode = null, $lockVersion = null)
@@ -25,6 +23,28 @@ class UserRepository extends ServiceEntityRepository
     }
 
     /**
+     * Items per page.
+     *
+     * Use constants to define configuration options that rarely change instead
+     * of specifying them in app/config/config.yml.
+     * See https://symfony.com/doc/current/best_practices.html#configuration
+     *
+     * @constant int
+     */
+    const PAGINATOR_ITEMS_PER_PAGE = 10;
+
+    /**
+     * Query all records.
+     *
+     * @return \Doctrine\ORM\QueryBuilder Query builder
+     */
+    public function queryAll(): QueryBuilder
+    {
+        return $this->getOrCreateQueryBuilder()
+            ->orderBy('user.email', 'ASC');
+    }
+
+    /**
      * Used to upgrade (rehash) the user's password automatically over time.
      */
 //    public function upgradePassword(UserInterface $user, string $newEncodedPassword): void
@@ -37,10 +57,9 @@ class UserRepository extends ServiceEntityRepository
 //        $this->_em->persist($user);
 //        $this->_em->flush();
 //    }
+
     /**
      * Save record.
-     *
-     * @param User $user
      *
      * @throws ORMException
      * @throws OptimisticLockException
@@ -50,6 +69,18 @@ class UserRepository extends ServiceEntityRepository
         $this->_em->persist($user);
         $this->_em->flush($user);
     }
+    /**
+     * Get or create new query builder.
+     *
+     * @param \Doctrine\ORM\QueryBuilder|null $queryBuilder Query builder
+     *
+     * @return \Doctrine\ORM\QueryBuilder Query builder
+     */
+    private function getOrCreateQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
+    {
+        return $queryBuilder ?? $this->createQueryBuilder('user');
+    }
+
     // /**
     //  * @return User[] Returns an array of User objects
     //  */

@@ -6,8 +6,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -56,6 +56,10 @@ class User implements UserInterface
      *     length=255,
      *
      * )
+     * @Assert\Length(
+     *     min="6",
+     *     max="200",
+     * )
      * @Assert\NotBlank
      * @Assert\Email
      */
@@ -79,7 +83,7 @@ class User implements UserInterface
      * @Assert\NotBlank
      * @Assert\Length(
      *     min="6",
-     *     max="255",
+     *     max="200",
      * )
      */
     private $password;
@@ -93,6 +97,7 @@ class User implements UserInterface
     {
         return $this->id;
     }
+
     /**
      * Getter for the E-mail.
      *
@@ -102,6 +107,7 @@ class User implements UserInterface
     {
         return $this->email;
     }
+
     /**
      * Setter for the E-mail.
      *
@@ -139,6 +145,7 @@ class User implements UserInterface
 
         return array_unique($roles);
     }
+
     /**
      * Setter for the Roles.
      *
@@ -147,8 +154,8 @@ class User implements UserInterface
     public function setRoles(array $roles): void
     {
         $this->roles = $roles;
-
     }
+
     /**
      * Getter for the Password.
      *
@@ -160,6 +167,7 @@ class User implements UserInterface
     {
         return (string) $this->password;
     }
+
     /**
      * Setter for the Password.
      *
@@ -168,7 +176,6 @@ class User implements UserInterface
     public function setPassword(string $password): void
     {
         $this->password = $password;
-
     }
 
     /**
@@ -187,9 +194,4 @@ class User implements UserInterface
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
     }
-
-
-
-
-
 }

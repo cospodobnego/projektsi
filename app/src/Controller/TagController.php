@@ -2,35 +2,40 @@
 /**
  * Comment controller.
  */
+
 namespace App\Controller;
+
 use App\Entity\Tag;
 use App\Form\TagType;
-use Symfony\Component\HttpFoundation\Request;
 use App\Repository\TagRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use \Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
+
 /**
  * Class TagController.
  *
  * @Route("/tag")
  */
 class TagController extends AbstractController
-{ /**
- * Index action.
- *
- * @param \Symfony\Component\HttpFoundation\Request $request        HTTP request
- * @param \App\Repository\TagRepository            $tagRepository Tag repository
- * @param \Knp\Component\Pager\PaginatorInterface   $paginator      Paginator
- *
- * @return \Symfony\Component\HttpFoundation\Response HTTP response
- *
- * @Route(
- *     "/",
- *     name="tag_index",
- * )
- */
+{
+    /**
+     * Index action.
+     *
+     * @param \Symfony\Component\HttpFoundation\Request $request       HTTP request
+     * @param \App\Repository\TagRepository             $tagRepository Tag repository
+     * @param \Knp\Component\Pager\PaginatorInterface   $paginator     Paginator
+     *
+     * @return \Symfony\Component\HttpFoundation\Response HTTP response
+     *
+     * @Route(
+     *     "/",
+     *     name="tag_index",
+     * )
+     */
     public function index(Request $request, TagRepository $tagRepository, PaginatorInterface $paginator): Response
     {
         $pagination = $paginator->paginate(
@@ -44,6 +49,7 @@ class TagController extends AbstractController
             ['pagination' => $pagination]
         );
     }
+
     /**
      * Show action.
      *
@@ -65,11 +71,12 @@ class TagController extends AbstractController
             ['tag' => $tag]
         );
     }
+
     /**
      * Create action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request HTTP request
-     * @param \App\Repository\CommentRepository $commentRepository Comment repository
+     * @param \Symfony\Component\HttpFoundation\Request $request       HTTP request
+     * @param \App\Repository\TagRepository             $tagRepository Tag repository
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -85,11 +92,10 @@ class TagController extends AbstractController
     public function create(Request $request, TagRepository $tagRepository): Response
     {
         $tag = new Tag();
-        $form = $this->createForm(TagType::class,$tag);
+        $form = $this->createForm(TagType::class, $tag);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             $tagRepository->save($tag);
             $this->addFlash('success', 'Created successfully');
 
@@ -101,12 +107,13 @@ class TagController extends AbstractController
             ['form' => $form->createView()]
         );
     }
+
     /**
      * Edit action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request            HTTP request
-     * @param \App\Entity\Tag                     $tag       Tag entity
-     * @param \App\Repository\TagRepository        $tagRepository Tag repository
+     * @param \Symfony\Component\HttpFoundation\Request $request       HTTP request
+     * @param \App\Entity\Tag                           $tag           Tag entity
+     * @param \App\Repository\TagRepository             $tagRepository Tag repository
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -126,7 +133,6 @@ class TagController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             $tagRepository->save($tag);
             $this->addFlash('success', 'updated successfully');
 
@@ -141,12 +147,13 @@ class TagController extends AbstractController
             ]
         );
     }
+
     /**
      * Delete action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request            HTTP request
-     * @param \App\Entity\Tag                  $tag       Tag entity
-     * @param \App\Repository\TagRepository        $tagRepository Tag repository
+     * @param \Symfony\Component\HttpFoundation\Request $request       HTTP request
+     * @param \App\Entity\Tag                           $tag           Tag entity
+     * @param \App\Repository\TagRepository             $tagRepository Tag repository
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -167,7 +174,7 @@ class TagController extends AbstractController
 
             return $this->redirectToRoute('tag_index');
         }
-        $form = $this->createForm(TagType::class, $tag, ['method' => 'DELETE']);
+        $form = $this->createForm(FormType::class, $tag, ['method' => 'DELETE']);
         $form->handleRequest($request);
 
         if ($request->isMethod('DELETE') && !$form->isSubmitted()) {
@@ -189,6 +196,4 @@ class TagController extends AbstractController
             ]
         );
     }
-
-
 }

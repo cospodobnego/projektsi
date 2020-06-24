@@ -2,6 +2,7 @@
 /**
  * Comment repository.
  */
+
 namespace App\Repository;
 
 use App\Entity\Comment;
@@ -9,10 +10,10 @@ use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\QueryBuilder;
-use Knp\Component\Pager\PaginatorInterface;
 
 /**
- * Class PostRepository
+ * Class PostRepository.
+ *
  * @method Comment|null find($id, $lockMode = null, $lockVersion = null)
  * @method Comment|null findOneBy(array $criteria, array $orderBy = null)
  * @method Comment[]    findAll()
@@ -30,6 +31,7 @@ class CommentRepository extends ServiceEntityRepository
      * @constant int
      */
     const PAGINATOR_ITEMS_PER_PAGE = 4;
+
     /**
      * PostRepository constructor.
      *
@@ -48,8 +50,9 @@ class CommentRepository extends ServiceEntityRepository
     public function queryAll(): QueryBuilder
     {
         return $this->getOrCreateQueryBuilder()
-            ->orderBy('comment.date', 'DESC');
+            ->orderBy('comment.id', 'DESC');
     }
+
     /**
      * Query comments by author.
      *
@@ -66,6 +69,7 @@ class CommentRepository extends ServiceEntityRepository
 
         return $queryBuilder;
     }
+
     /**
      * Get or create new query builder.
      *
@@ -77,7 +81,6 @@ class CommentRepository extends ServiceEntityRepository
     {
         return $queryBuilder ?? $this->createQueryBuilder('comment');
     }
-
 
     /**
      * Save record.
@@ -92,6 +95,7 @@ class CommentRepository extends ServiceEntityRepository
         $this->_em->persist($comment);
         $this->_em->flush($comment);
     }
+
     /**
      * Delete record.
      *
@@ -105,5 +109,4 @@ class CommentRepository extends ServiceEntityRepository
         $this->_em->remove($comment);
         $this->_em->flush($comment);
     }
-
 }

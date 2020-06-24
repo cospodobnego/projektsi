@@ -34,7 +34,7 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * Logout action
+     * Logout action.
      *
      * @throws LogicException
      *

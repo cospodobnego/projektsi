@@ -4,8 +4,8 @@ namespace App\Repository;
 
 use App\Entity\Tag;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\QueryBuilder;
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @method Tag|null find($id, $lockMode = null, $lockVersion = null)
@@ -25,6 +25,7 @@ class TagRepository extends ServiceEntityRepository
      * @constant int
      */
     const PAGINATOR_ITEMS_PER_PAGE = 4;
+
     /**
      * PostRepository constructor.
      *
@@ -43,7 +44,7 @@ class TagRepository extends ServiceEntityRepository
     public function queryAll(): QueryBuilder
     {
         return $this->getOrCreateQueryBuilder()
-            ->orderBy('tag.id', 'ASC');
+            ->orderBy('tag.name', 'ASC');
     }
 
     /**
@@ -85,8 +86,4 @@ class TagRepository extends ServiceEntityRepository
         $this->_em->remove($tag);
         $this->_em->flush($tag);
     }
-
-
-
 }
-

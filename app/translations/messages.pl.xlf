@@ -4,11 +4,7 @@
         <body>
             <trans-unit id="Actions">
                 <source>Actions</source>
-                <target>Działania</target>
-            </trans-unit>
-            <trans-unit id="ID">
-                <source>ID</source>
-                <target>ID</target>
+                <target>działania</target>
             </trans-unit>
             <trans-unit id="Post list">
                 <source>Post list</source>
@@ -16,11 +12,11 @@
             </trans-unit>
             <trans-unit id="Date">
                 <source>Date</source>
-                <target>Data</target>
+                <target>data</target>
             </trans-unit>
             <trans-unit id="Name">
                 <source>Name</source>
-                <target>Nazwa</target>
+                <target>nazwa</target>
             </trans-unit>
             <trans-unit id="Empty list">
                 <source>Empty list</source>
@@ -28,7 +24,7 @@
             </trans-unit>
             <trans-unit id="Text">
                 <source>Text</source>
-                <target>Tekst</target>
+                <target>tekst</target>
             </trans-unit>
             <trans-unit id="view">
                 <source>view</source>
@@ -36,7 +32,7 @@
             </trans-unit>
             <trans-unit id="Category">
                 <source>Category</source>
-                <target>Kategoria</target>
+                <target>kategoria</target>
             </trans-unit>
             <trans-unit id="Tag details">
                 <source>Tag details</source>
@@ -70,10 +66,6 @@
                 <source>Comment list</source>
                 <target>Lista komentarzy</target>
             </trans-unit>
-            <trans-unit id="Post ID">
-                <source>Post ID</source>
-                <target>Post ID</target>
-            </trans-unit>
             <trans-unit id="view post">
                 <source>view post</source>
                 <target>zobacz post</target>
@@ -86,17 +78,9 @@
                 <source>Tag list</source>
                 <target>Lista tagów</target>
             </trans-unit>
-            <trans-unit id="Category edit">
-                <source>Category edit</source>
-                <target>Edytuj kategorię</target>
-            </trans-unit>
             <trans-unit id="save">
                 <source>save</source>
                 <target>zapisz</target>
-            </trans-unit>
-            <trans-unit id="Category delete">
-                <source>Category delete</source>
-                <target>Usuń kategorię</target>
             </trans-unit>
             <trans-unit id="delete">
                 <source>delete</source>
@@ -109,10 +93,6 @@
             <trans-unit id="edit">
                 <source>edit</source>
                 <target>edytuj</target>
-            </trans-unit>
-            <trans-unit id="Create category">
-                <source>Create category</source>
-                <target>Utwórz kategorię</target>
             </trans-unit>
             <trans-unit id="posts">
                 <source>posts</source>
@@ -131,12 +111,252 @@
                 <target>tagi</target>
             </trans-unit>
             <trans-unit id="login">
-                <source>login</source>
-                <target>zaloguj się</target>
+            <source>login</source>
+            <target>zaloguj się</target>
             </trans-unit>
-            <trans-unit id="Post edit">
-                <source>Post edit</source>
-                <target>Edytuj post</target>
+            <trans-unit id="post_author">
+                <source>post_author</source>
+                <target>autor posta</target>
+            </trans-unit>
+            <trans-unit id="message.empty_list">
+                <source>message.empty_list</source>
+                <target>Lista jest pusta!</target>
+            </trans-unit>
+            <trans-unit id="Post_author ">
+                <source>Post_author</source>
+                <target>autor posta</target>
+            </trans-unit>
+            <trans-unit id="create_comment">
+                <source>create_comment</source>
+                <target>Dodaj komentarz</target>
+            </trans-unit>
+            <trans-unit id="Post_comments">
+                <source>Post_comments</source>
+                <target>komentarze do posta</target>
+            </trans-unit>
+            <trans-unit id="comment_author:">
+                <source>comment_author:</source>
+                <target>autor komentarza:</target>
+            </trans-unit>
+            <trans-unit id="comment_text:">
+                <source>comment_text:</source>
+                <target>treść komentarza:</target>
+            </trans-unit>
+            <trans-unit id="Log in!">
+                <source>Log in!</source>
+                <target>Zaloguj się</target>
+            </trans-unit>
+            <trans-unit id="Sign in">
+                <source>Sign in</source>
+                <target>Zaloguj się</target>
+            </trans-unit>
+            <trans-unit id="register_label">
+                <source>register_label</source>
+                <target>Rejestracja</target>
+            </trans-unit>
+            <trans-unit id="comment_author">
+                <source>comment_author</source>
+                <target>autor komentarza</target>
+            </trans-unit>
+            <trans-unit id="Post name">
+                <source>Post name</source>
+                <target>nazwa posta</target>
+            </trans-unit>
+            <trans-unit id="Comment_view">
+                <source>Comment_view</source>
+                <target>zobacz komentarz</target>
+            </trans-unit>
+            <trans-unit id="Post ID">
+                <source>Post ID</source>
+                <target>ID posta</target>
+            </trans-unit>
+            <trans-unit id="logout">
+                <source>logout</source>
+                <target>wyloguj się</target>
+            </trans-unit>
+            <trans-unit id="my_acount">
+                <source>my_acount</source>
+                <target>moje konto</target>
+            </trans-unit>
+            <trans-unit id="register">
+                <source>register</source>
+                <target>zarejestruj się</target>
+            </trans-unit>
+            <trans-unit id="message_form_error">
+                <source>message_form_error</source>
+                <target>błąd w formularzu</target>
+            </trans-unit>
+            <trans-unit id="action_save">
+                <source>action_save</source>
+                <target>zapisz</target>
+            </trans-unit>
+            <trans-unit id="action_back_to_list">
+                <source>action_back_to_list</source>
+                <target>wróć</target>
+            </trans-unit>
+            <trans-unit id="user_email">
+                <source>user_email</source>
+                <target>email użytkownika</target>
+            </trans-unit>
+            <trans-unit id="user_email:">
+                <source>user_email:</source>
+                <target>email użytkownika:</target>
+            </trans-unit>
+            <trans-unit id="view_posts">
+                <source>view_posts</source>
+                <target>zobacz posty</target>
+            </trans-unit>
+            <trans-unit id="my_posts">
+                <source>my_posts</source>
+                <target>moje posty</target>
+            </trans-unit>
+            <trans-unit id="view_comments">
+                <source>view_comments</source>
+                <target>zobacz komentarze</target>
+            </trans-unit>
+            <trans-unit id="my_comments">
+                <source>my_comments</source>
+                <target>moje komentarze</target>
+            </trans-unit>
+            <trans-unit id="action_change_password">
+                <source>action_change_password</source>
+                <target>zmień hasło</target>
+            </trans-unit>
+            <trans-unit id="edit_password_label">
+                <source>edit_password_label</source>
+                <target>zmień hasło</target>
+            </trans-unit>
+            <trans-unit id="action_change_email">
+                <source>action_change_email</source>
+                <target>zmień email</target>
+            </trans-unit>
+            <trans-unit id="edit_mail_label">
+                <source>edit_mail_label</source>
+                <target>zmień email</target>
+            </trans-unit>
+            <trans-unit id="action_users">
+                <source>action_users</source>
+                <target>użytkownicy</target>
+            </trans-unit>
+            <trans-unit id="see_users">
+                <source>see_users</source>
+                <target>zobacz użytkowników</target>
+            </trans-unit>
+            <trans-unit id="users_list">
+                <source>users_list</source>
+                <target>lista użytkowników</target>
+            </trans-unit>
+            <trans-unit id="user.email">
+                <source>user.email</source>
+                <target>email użytkownika</target>
+            </trans-unit>
+            <trans-unit id="change_user_email">
+                <source>change_user_email</source>
+                <target>zmień email użytkownika</target>
+            </trans-unit>
+            <trans-unit id="change_user_password">
+                <source>change_user_password</source>
+                <target>zmień hasło użytkownika</target>
+            </trans-unit>
+            <trans-unit id="change_email">
+                <source>change_email</source>
+                <target>zmień email</target>
+            </trans-unit>
+            <trans-unit id="change_password">
+                <source>change_password</source>
+                <target>zmień hasło</target>
+            </trans-unit>
+            <trans-unit id="label_email">
+                <source>label_email</source>
+                <target>email</target>
+            </trans-unit>
+            <trans-unit id="label_repeat_password">
+                <source>label_repeat_password</source>
+                <target>powtórz hasło</target>
+            </trans-unit>
+            <trans-unit id="title.app_register">
+                <source>title.app_register</source>
+                <target>zarejestruj się</target>
+            </trans-unit>
+            <trans-unit id="post_edit">
+                <source>post_edit</source>
+                <target>edytuj post</target>
+            </trans-unit>
+            <trans-unit id="post_delete">
+                <source>post_delete</source>
+                <target>usuń post</target>
+            </trans-unit>
+            <trans-unit id="post_create">
+                <source>post_create</source>
+                <target>dodaj post</target>
+            </trans-unit>
+            <trans-unit id="category_edit">
+                <source>category_edit</source>
+                <target>edytuj kategorię</target>
+            </trans-unit>
+            <trans-unit id="category_delete">
+                <source>category_delete</source>
+                <target>usuń kategorię</target>
+            </trans-unit>
+            <trans-unit id="category_create">
+                <source>category_create</source>
+                <target>dodaj kategorię</target>
+            </trans-unit>
+            <trans-unit id="title.comment_edit">
+                <source>title.comment_edit</source>
+                <target>edytuj komentarz</target>
+            </trans-unit>
+            <trans-unit id="title.comment_delete">
+                <source>title.comment_delete</source>
+                <target>usuń komentarz</target>
+            </trans-unit>
+            <trans-unit id="title.comment_create">
+                <source>title.comment_create</source>
+                <target>dodaj komentarz</target>
+            </trans-unit>
+            <trans-unit id="title_user.email_edit">
+                <source>title_user.email_edit</source>
+                <target>edytuj email użytkownika</target>
+            </trans-unit>
+            <trans-unit id="title_user.password_edit">
+                <source>title_user.password_edit</source>
+                <target>edytuj hasło użytkownika</target>
+            </trans-unit>
+            <trans-unit id="tag_edit">
+                <source>tag_edit</source>
+                <target>edytuj tag</target>
+            </trans-unit>
+            <trans-unit id="tag_delete">
+                <source>tag_delete</source>
+                <target>usuń tag</target>
+            </trans-unit>
+            <trans-unit id="tag_create">
+                <source>tag_create</source>
+                <target>dodaj tag</target>
+            </trans-unit>
+            <trans-unit id="password_label">
+                <source>password_label</source>
+                <target>hasło</target>
+            </trans-unit>
+            <trans-unit id="tag">
+                <source>tag</source>
+                <target>tag </target>
+            </trans-unit>
+            <trans-unit id="Password">
+                <source>Password</source>
+                <target>Hasło</target>
+            </trans-unit>
+            <trans-unit id="Email">
+                <source>Email</source>
+                <target>Email</target>
+            </trans-unit>
+            <trans-unit id="You are logged in as, {{ app.user.username }}">
+                <source>You are logged in as, {{ app.user.username }}</source>
+                <target>Jesteś zalogowany/a jako, {{ app.user.username }}</target>
+            </trans-unit>
+            <trans-unit id="Please sign in">
+                <source>Please sign in</source>
+                <target>Zaloguj się</target>
             </trans-unit>
 
         </body>

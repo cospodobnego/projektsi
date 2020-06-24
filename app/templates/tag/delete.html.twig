@@ -1,23 +1,11 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}
-    {{ 'Delete tag'|trans({'%id%': tag.id|default('')}) }}
-{% endblock %}
-
-{% block body %}
-    <div class="tag_container container">
-
-    <h1>{{ 'Delete tag'|trans({'%id%': tag.id|default('')}) }}</h1>
-    {{ form_start(form, { method: 'DELETE', action: url('tag_delete', {id: tag.id}) }) }}
-    {{ form_widget(form) }}
-    <div class="form-group row float-sm-right">
-        <input type="submit" value="{{ 'delete'|trans }}" class="btn btn-primary" />
-    </div>
-    <div class="form-group row float-sm-left">
-        <a href="{{ url('tag_index') }}" class="btn btn-link">
-            {{ 'Back to list'|trans }}
-        </a>
-    </div>
-    {{ form_end(form) }}
-    </div>
-{% endblock %}
+{% include 'default/_form.html.twig' with {
+    page_title: 'tag_delete'|trans,
+    page_title_param: {'%id%': tag.id},
+    attr: {
+        method: 'DELETE',
+        action: url('tag_delete', {'id': tag.id}),
+    },
+    form: form,
+    submit_label: 'delete'|trans,
+    back_to_list_path: 'tag_index',
+} %}

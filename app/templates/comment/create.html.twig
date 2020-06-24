@@ -1,23 +1,14 @@
-{% extends 'base.html.twig' %}
 
-{% block title %}
-    {{ 'Create comment'|trans }}
-{% endblock %}
+{% include 'default/_form.html.twig' with {
+    page_title: 'title.comment_create' |trans,
+    page_title_param: {'%id':post.id},
+    attr: {
+        method: 'POST',
+        action: url('comment_create', {id: post.id}),
+    },
+    form: form,
+    sumbit_label: 'create'| trans,
+    back_to_list_path: 'post_index',
+} %}
 
-{% block body %}
-    <div class="comment_container container">
 
-    <h1>{{ 'Create comment'|trans }}</h1>
-    {{ form_start(form, { method: 'POST', action: url('comment_create') }) }}
-    {{ form_widget(form) }}
-    <div class="form-group row float-sm-right">
-        <input type="submit" value="{{ 'create'|trans }}" class="btn btn-primary" />
-    </div>
-    <div class="form-group row float-sm-left">
-        <a href="{{ url('comment_index') }}" class="btn btn-link">
-            {{ 'Back to list'|trans }}
-        </a>
-    </div>
-    {{ form_end(form) }}
-    </div>
-{% endblock %}

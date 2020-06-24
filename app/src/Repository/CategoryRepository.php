@@ -4,8 +4,8 @@ namespace App\Repository;
 
 use App\Entity\Category;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\QueryBuilder;
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @method Category|null find($id, $lockMode = null, $lockVersion = null)
@@ -25,6 +25,7 @@ class CategoryRepository extends ServiceEntityRepository
      * @constant int
      */
     const PAGINATOR_ITEMS_PER_PAGE = 4;
+
     /**
      * PostRepository constructor.
      *
@@ -43,7 +44,7 @@ class CategoryRepository extends ServiceEntityRepository
     public function queryAll(): QueryBuilder
     {
         return $this->getOrCreateQueryBuilder()
-            ->orderBy('category.id', 'ASC');
+            ->orderBy('category.name', 'ASC');
     }
 
     /**
@@ -57,6 +58,7 @@ class CategoryRepository extends ServiceEntityRepository
     {
         return $queryBuilder ?? $this->createQueryBuilder('category');
     }
+
     /**
      * Save record.
      *
@@ -85,4 +87,3 @@ class CategoryRepository extends ServiceEntityRepository
         $this->_em->flush($category);
     }
 }
-
