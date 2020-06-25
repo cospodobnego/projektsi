@@ -54,7 +54,7 @@ class Comment
      * @Assert\Type(type="string")
      * @Assert\NotBlank
      * @Assert\Length(
-     *     min="2",
+     *     min="3",
      *     max="255",
      *
      * )

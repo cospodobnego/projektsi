@@ -15,6 +15,12 @@ use Doctrine\Persistence\ObjectManager;
 class PostFixtures extends AbstractBaseFixtures implements DependentFixtureInterface
 {
     /**
+     * Posts that were already added.
+     *
+     * @var array
+     */
+    private $value = [];
+    /**
      * Load data.
      *
      * @param \Doctrine\Persistence\ObjectManager $manager Persistence object manager
@@ -23,7 +29,9 @@ class PostFixtures extends AbstractBaseFixtures implements DependentFixtureInter
     {
         $this->createMany(50, 'posts', function ($i) {
             $post = new Post();
-            $post->setName($this->faker->word);
+            $newName = $this->faker->unique()->word;
+            $this->value[] = $newName;
+            $post->setName($newName);
             $post->setText($this->faker->sentence);
             $post->setDate($this->faker->dateTimeBetween('-100 days', '-1 days'));
             $post->setCategory($this->getRandomReference('categories'));

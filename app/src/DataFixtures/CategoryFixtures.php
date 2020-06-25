@@ -14,6 +14,13 @@ use Doctrine\Persistence\ObjectManager;
 class CategoryFixtures extends AbstractBaseFixtures
 {
     /**
+     * Categories that were already added.
+     *
+     * @var array
+     */
+    private $value = [];
+
+    /**
      * Load data.
      *
      * @param \Doctrine\Persistence\ObjectManager $manager Object manager
@@ -22,7 +29,9 @@ class CategoryFixtures extends AbstractBaseFixtures
     {
         $this->createMany(10, 'categories', function ($i) {
             $category = new Category();
-            $category->setName($this->faker->word);
+            $newName = $this->faker->unique()->word;
+            $this->value[] = $newName;
+            $category->setName($newName);
 
             return $category;
         });

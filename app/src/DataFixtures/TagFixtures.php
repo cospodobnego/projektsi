@@ -14,6 +14,12 @@ use Doctrine\Persistence\ObjectManager;
 class TagFixtures extends AbstractBaseFixtures
 {
     /**
+     * Tags that were already added.
+     *
+     * @var array
+     */
+    private $value = [];
+    /**
      * Load data.
      *
      * @param \Doctrine\Persistence\ObjectManager $manager Object manager
@@ -22,7 +28,10 @@ class TagFixtures extends AbstractBaseFixtures
     {
         $this->createMany(10, 'tags', function ($i) {
             $tag = new Tag();
-            $tag->setName($this->faker->word);
+            $newName = $this->faker->unique()->word;
+            $this->value[] = $newName;
+            $tag->setName($newName);
+
 
             return $tag;
         });
