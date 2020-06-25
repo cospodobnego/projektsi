@@ -7,9 +7,10 @@
 {% block body %}
 <div class="post_container container">
 
-    {% if is_granted('ROLE_ADMIN') %}
+
         <div class="col text-center">
             <h1>{{ 'Post list'|trans }}</h1>
+            {% if is_granted('ROLE_ADMIN') %}
             <a class="btn btn-lg btn-primary mt-3 btn-dark" href="{{ url('post_create') }}"> <i class="fa fa-plus" ></i>
             </a>
         </div>

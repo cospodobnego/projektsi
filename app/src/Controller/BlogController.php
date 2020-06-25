@@ -1,6 +1,6 @@
 <?php
 /**
- * RedirectToRoute controller.
+ * Blog controller.
  */
 
 namespace App\Controller;
@@ -29,6 +29,6 @@ class BlogController extends AbstractController
      */
     public function index(): RedirectResponse
     {
-        return $this->redirectToRoute('post_index');
+        return $this->redirectToRoute('app_login');
     }
 }

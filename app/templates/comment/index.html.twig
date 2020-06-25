@@ -8,12 +8,12 @@
 <div class="comment_container container">
 
 
-    {% if is_granted('ROLE_USER') %}
+
     <div class="col text-center">
         <h1>{{ 'Comment list'|trans }}</h1>
 
     </div>
-    {% endif %}
+
     {% if pagination is defined and pagination.items|length %}
 
         <div class="pagination justify-content-center" aria-label="Page navigation">

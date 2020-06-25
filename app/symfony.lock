@@ -88,7 +88,7 @@
         "version": "1.2.1"
     },
     "doctrine/migrations": {
-        "version": "3.0.0"
+        "version": "3.0.1"
     },
     "doctrine/orm": {
         "version": "v2.7.3"
@@ -103,7 +103,7 @@
         "version": "1.1.0"
     },
     "egulias/email-validator": {
-        "version": "2.1.17"
+        "version": "2.1.18"
     },
     "escapestudios/symfony2-coding-standard": {
         "version": "3.11.0"
@@ -148,13 +148,13 @@
         "version": "v4.5.0"
     },
     "ocramius/package-versions": {
-        "version": "1.8.0"
+        "version": "1.9.0"
     },
     "ocramius/proxy-manager": {
         "version": "2.8.0"
     },
     "pdepend/pdepend": {
-        "version": "2.7.1"
+        "version": "2.8.0"
     },
     "php": {
         "version": "7.4"
@@ -169,7 +169,7 @@
         "version": "5.1.0"
     },
     "phpdocumentor/type-resolver": {
-        "version": "1.1.0"
+        "version": "1.2.0"
     },
     "phpmd/phpmd": {
         "version": "2.8.2"
@@ -430,22 +430,22 @@
         ]
     },
     "symfony/polyfill-intl-icu": {
-        "version": "v1.17.0"
+        "version": "v1.17.1"
     },
     "symfony/polyfill-intl-idn": {
-        "version": "v1.17.0"
+        "version": "v1.17.1"
     },
     "symfony/polyfill-mbstring": {
-        "version": "v1.17.0"
+        "version": "v1.17.1"
     },
     "symfony/polyfill-php72": {
         "version": "v1.17.0"
     },
     "symfony/polyfill-php73": {
-        "version": "v1.17.0"
+        "version": "v1.17.1"
     },
     "symfony/polyfill-php80": {
-        "version": "v1.17.0"
+        "version": "v1.17.1"
     },
     "symfony/process": {
         "version": "v4.4.10"
@@ -609,6 +609,6 @@
         "version": "2.0.1"
     },
     "webmozart/assert": {
-        "version": "1.8.0"
+        "version": "1.9.0"
     }
 }
