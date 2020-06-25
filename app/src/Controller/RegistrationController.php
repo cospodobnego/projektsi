@@ -51,6 +51,9 @@ class RegistrationController extends AbstractController
      */
     public function index(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
+        if ($this->getUser()) {
+            return $this->redirectToRoute('post_index');
+        }
         $user = new User();
         $form = $this->createForm(RegistrationType::class, $user);
         if ($request->isMethod('POST')) {
@@ -60,7 +63,7 @@ class RegistrationController extends AbstractController
                 $user->setPassword($password);
                 $user->setRoles(['ROLE_USER']);
                 $this->registrationService->save($user);
-                $this->addFlash('success', 'registered_successfully');
+                $this->addFlash('success', 'message.registered_successfully');
 
                 return $this->redirectToRoute('app_login');
             }

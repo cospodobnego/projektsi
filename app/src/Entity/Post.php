@@ -59,7 +59,7 @@ class Post
      * @Assert\Type(type="string")
      * @Assert\NotBlank
      * @Assert\Length(
-     *     min="3",
+     *     min="2",
      *     max="45",
      * )
      */
@@ -91,6 +91,7 @@ class Post
      * @ORM\ManyToOne(
      *     targetEntity="App\Entity\Category",
      *      inversedBy="posts",
+     *     fetch="EXTRA_LAZY",
      *     )
      * @ORM\JoinColumn(nullable=false)
      */
@@ -195,7 +196,7 @@ class Post
     /**
      * Getter for Text.
      *
-     * @return string|null Name
+     * @return string|null Text
      */
     public function getText(): ?string
     {

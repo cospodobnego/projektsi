@@ -34,17 +34,15 @@ class TagController extends AbstractController
          *
          * @param \App\Service\TagService $tagService Tag service
          */
-        public function __construct(TagService $tagService)
-        {
-            $this->tagService = $tagService;
-        }
+    public function __construct(TagService $tagService)
+    {
+        $this->tagService = $tagService;
+    }
 
     /**
      * Index action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request       HTTP request
-     * @param \App\Repository\TagRepository             $tagRepository Tag repository
-     * @param \Knp\Component\Pager\PaginatorInterface   $paginator     Paginator
+     * @param \Symfony\Component\HttpFoundation\Request $request HTTP request
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -90,7 +88,7 @@ class TagController extends AbstractController
     /**
      * Create action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request       HTTP request
+     * @param \Symfony\Component\HttpFoundation\Request $request HTTP request
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -126,8 +124,8 @@ class TagController extends AbstractController
     /**
      * Edit action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request       HTTP request
-     * @param \App\Entity\Tag                           $tag           Tag entity
+     * @param \Symfony\Component\HttpFoundation\Request $request HTTP request
+     * @param \App\Entity\Tag                           $tag     Tag entity
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -167,8 +165,8 @@ class TagController extends AbstractController
     /**
      * Delete action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request       HTTP request
-     * @param \App\Entity\Tag                           $tag           Tag entity
+     * @param \Symfony\Component\HttpFoundation\Request $request HTTP request
+     * @param \App\Entity\Tag                           $tag     Tag entity
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *

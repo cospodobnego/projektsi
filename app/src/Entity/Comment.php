@@ -54,7 +54,7 @@ class Comment
      * @Assert\Type(type="string")
      * @Assert\NotBlank
      * @Assert\Length(
-     *     min="3",
+     *     min="2",
      *     max="255",
      *
      * )
@@ -79,51 +79,85 @@ class Comment
      * @ORM\JoinColumn(nullable=false)
      */
     private $author;
-
+    /**
+     * Getter for Id.
+     *
+     * @return int|null Result
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
-
+    /**
+     * Getter for Date.
+     *
+     * @return DateTimeInterface|null date
+     */
     public function getDate(): ?\DateTimeInterface
     {
         return $this->date;
     }
-
+    /**
+     * Setter for Date.
+     *
+     * @param \DateTimeInterface $date Date
+     */
     public function setDate(\DateTimeInterface $date): void
     {
         $this->date = $date;
     }
-
+    /**
+     * Getter for Text.
+     *
+     * @return string|null Text
+     */
     public function getText(): ?string
     {
         return $this->text;
     }
-
+    /**
+     * Setter for Text.
+     *
+     * @param string $text Text
+     */
     public function setText(string $text): void
     {
         $this->text = $text;
     }
-
+    /**
+     * Getter for post.
+     *
+     * @return Post|null Post
+     */
     public function getPost(): ?Post
     {
         return $this->post;
     }
-
+    /**
+     * Setter for post.
+     *
+     * @param Post $post Post
+     */
     public function setPost(?Post $post): void
     {
         $this->post = $post;
     }
-
+    /**
+     * Getter for author.
+     *
+     * @return User[]|null User
+     */
     public function getAuthor(): ?User
     {
         return $this->author;
     }
-
-    public function setAuthor(?User $author): self
+    /**
+     * Setter for author.
+     *
+     * @param User $author User
+     */
+    public function setAuthor(?User $author): void
     {
         $this->author = $author;
-
-        return $this;
     }
 }

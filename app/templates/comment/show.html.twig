@@ -17,8 +17,8 @@
             <dd>{{  comment.text }}</dd>
             <dt>{{ 'comment_author'|trans }}</dt>
             <dd>{{  comment.author.email }}</dd>
-            <dt>{{ 'Post ID'|trans }}</dt>
-            <dd>{{  comment.post.id }}</dd>
+            <dt>{{ 'Post name'|trans }}</dt>
+            <dd>{{  comment.post.name }}</dd>
         </dl>
         <p>
             <a href="{{ url('comment_index') }}" title="{{ 'Back to list'|trans }}">

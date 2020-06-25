@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Knp\Component\Pager\PaginatorInterface;
+
 /**
  * Class UserController.
  *
@@ -50,11 +50,12 @@ class UserController extends AbstractController
     /**
      * Index action.
      *
-     * @Route("/user_index", name="user_index")
+     * @Route("/", name="user_index")
+     *
+     * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
      * @IsGranted("ROLE_USER")
      */
-
     public function index(): Response
     {
         $userEmail = $this->getUser();
@@ -71,14 +72,14 @@ class UserController extends AbstractController
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
      * @Route(
-     *     "/user_admin_panel",
+     *     "/admin_panel",
      *     methods={"GET"},
      *     name="user_admin_panel",
      * )
      *
      * @IsGranted("ROLE_ADMIN")
      */
-    public function Userlist(Request $request): Response
+    public function userList(Request $request): Response
     {
         $page = $request->query->getInt('page', 1);
         $pagination = $this->userService->createPaginatedList($page);
@@ -110,7 +111,10 @@ class UserController extends AbstractController
      *     name="user_change",
      * )
      *
-     * @IsGranted("ROLE_USER")
+     * @IsGranted(
+     *     "EDIT",
+     *     subject="user",
+     * )
      */
     public function edit(Request $request, User $user, UserPasswordEncoderInterface $passwordEncoder): Response
     {
@@ -152,7 +156,10 @@ class UserController extends AbstractController
      *     name="user_changemail",
      * )
      *
-     * @IsGranted("ROLE_USER")
+     * @IsGranted(
+     *     "EDIT",
+     *     subject="user",
+     * )
      */
     public function editemail(Request $request, User $user)
     {
@@ -170,6 +177,5 @@ class UserController extends AbstractController
             ['form' => $form->createView(),
                 'user' => $user, ]
         );
-
     }
 }

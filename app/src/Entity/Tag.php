@@ -45,7 +45,7 @@ class Tag
      * @Assert\NotBlank
 
      * @Assert\Length(
-     *     min="3",
+     *     min="2",
      *     max="255",
      * )
      */
@@ -58,7 +58,8 @@ class Tag
      *
      * @ORM\ManyToMany(
      *      targetEntity="App\Entity\Post",
-     *      mappedBy="tag")
+     *      mappedBy="tag",
+     *     fetch="EXTRA_LAZY",)
      */
     private $posts;
 
@@ -74,7 +75,7 @@ class Tag
      *
      * @Assert\Type(type="string")
      * @Assert\Length(
-     *     min="3",
+     *     min="2",
      *     max="255",
      * )
      *
@@ -111,7 +112,7 @@ class Tag
     }
 
     /**
-     * Setter for Title.
+     * Setter for Name.
      *
      * @param string $name Name
      */
@@ -121,7 +122,7 @@ class Tag
     }
 
     /**
-     * Getter for tasks.
+     * Getter for posts.
      *
      * @return \Doctrine\Common\Collections\Collection|\App\Entity\Post[] Posts collection
      */
@@ -156,11 +157,20 @@ class Tag
         }
     }
 
+    /**
+     * Getter for Code.
+     *
+     * @return string|null Code
+     */
     public function getCode(): ?string
     {
         return $this->code;
     }
-
+    /**
+     * Setter for Code.
+     *
+     * @param string $code Code
+     */
     public function setCode(string $code): void
     {
         $this->code = $code;

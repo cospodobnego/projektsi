@@ -18,7 +18,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="App\Repository\CategoryRepository")
  * @ORM\Table(name="categories")
  *
- *@UniqueEntity(fields={"name"})
+ * @UniqueEntity(fields={"name"})
  */
 class Category
 {
@@ -45,7 +45,7 @@ class Category
      * @Assert\Type(type="string")
      * @Assert\NotBlank
      * @Assert\Length(
-     *     min="3",
+     *     min="2",
      *     max="45",
      * )
      *  @Assert\Regex(
@@ -63,6 +63,7 @@ class Category
      * @ORM\OneToMany(
      *     targetEntity="App\Entity\Post",
      *      mappedBy="category",
+     *     fetch="EXTRA_LAZY",
      *     )
      *
      *
@@ -83,6 +84,9 @@ class Category
      */
     private $code;
 
+    /**
+     * Category Entity constructor.
+     */
     public function __construct()
     {
         $this->posts = new ArrayCollection();
@@ -127,7 +131,11 @@ class Category
     {
         return $this->posts;
     }
-
+    /**
+     * Add Post.
+     *
+     * @param Post $post Post
+     */
     public function addPost(Post $post): void
     {
         if (!$this->posts->contains($post)) {
@@ -135,7 +143,11 @@ class Category
             $post->setCategory($this);
         }
     }
-
+    /**
+     * Remove Post.
+     *
+     * @param Post $post Post
+     */
     public function removePost(Post $post): void
     {
         if ($this->posts->contains($post)) {
@@ -146,12 +158,20 @@ class Category
             }
         }
     }
-
+    /**
+     * Getter for Code.
+     *
+     * @return string|null Code
+     */
     public function getCode(): ?string
     {
         return $this->code;
     }
-
+    /**
+     * Setter for Code.
+     *
+     * @param string $code Code
+     */
     public function setCode(string $code): void
     {
         $this->code = $code;

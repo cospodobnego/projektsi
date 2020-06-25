@@ -94,6 +94,33 @@ class PostRepository extends ServiceEntityRepository
         return $queryBuilder;
     }
     /**
+     * Save record.
+     *
+     * @param \App\Entity\Post $post Post entity
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function save(Post $post): void
+    {
+        $this->_em->persist($post);
+        $this->_em->flush($post);
+    }
+
+    /**
+     * Delete record.
+     *
+     * @param \App\Entity\Post $post Post entity
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function delete(Post $post): void
+    {
+        $this->_em->remove($post);
+        $this->_em->flush($post);
+    }
+    /**
      * Apply filters to paginated list.
      *
      * @param \Doctrine\ORM\QueryBuilder $queryBuilder Query builder
@@ -125,33 +152,5 @@ class PostRepository extends ServiceEntityRepository
     private function getOrCreateQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
     {
         return $queryBuilder ?? $this->createQueryBuilder('post');
-    }
-
-    /**
-     * Save record.
-     *
-     * @param \App\Entity\Post $post Post entity
-     *
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
-     */
-    public function save(Post $post): void
-    {
-        $this->_em->persist($post);
-        $this->_em->flush($post);
-    }
-
-    /**
-     * Delete record.
-     *
-     * @param \App\Entity\Post $post Post entity
-     *
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
-     */
-    public function delete(Post $post): void
-    {
-        $this->_em->remove($post);
-        $this->_em->flush($post);
     }
 }

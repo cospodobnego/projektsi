@@ -32,20 +32,17 @@ class PostController extends AbstractController
     /**
      * PostController constructor.
      *
-     * @param \App\Service\PostService                 $postService  Post service
-
-     * @param \Symfony\Component\Filesystem\Filesystem $filesystem   Filesystem component
+     * @param \App\Service\PostService $postService Post service
+     *
      */
     public function __construct(PostService $postService)
     {
         $this->postService = $postService;
-
     }
     /**
      * Index action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request        HTTP request
-     * @param \Knp\Component\Pager\PaginatorInterface   $paginator      Paginator
+     * @param \Symfony\Component\HttpFoundation\Request $request HTTP request
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -56,8 +53,6 @@ class PostController extends AbstractController
      */
     public function index(Request $request): Response
     {
-//        $page = $request->query->getInt('page', 1);
-//        $pagination = $this->postService->createPaginatedList($page);
         $pagination = $this->postService->createPaginatedList(
             $request->query->getInt('page', 1),
             $request->query->getAlnum('filters', [])
@@ -72,8 +67,8 @@ class PostController extends AbstractController
     /**
      * My posts action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request        HTTP request
-     * @param \Knp\Component\Pager\PaginatorInterface   $paginator      Paginator
+     * @param \Symfony\Component\HttpFoundation\Request $request HTTP request
+     *
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -120,7 +115,7 @@ class PostController extends AbstractController
     /**
      * Create action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request        HTTP request
+     * @param \Symfony\Component\HttpFoundation\Request $request HTTP request
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -148,7 +143,7 @@ class PostController extends AbstractController
             $post->setDate(new \DateTime());
             $this->postService->save($post);
 
-            $this->addFlash('success', 'created_successfully');
+            $this->addFlash('success', 'message.created_successfully');
 
             return $this->redirectToRoute('post_index');
         }
@@ -162,8 +157,8 @@ class PostController extends AbstractController
     /**
      * Edit action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request        HTTP request
-     * @param \App\Entity\Post                          $post           Post entity
+     * @param \Symfony\Component\HttpFoundation\Request $request HTTP request
+     * @param \App\Entity\Post                          $post    Post entity
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -190,7 +185,7 @@ class PostController extends AbstractController
             $post->setDate(new \DateTime());
             $this->postService->save($post);
 
-            $this->addFlash('success', 'updated_successfully');
+            $this->addFlash('success', 'message.updated_successfully');
 
             return $this->redirectToRoute('post_index');
         }
@@ -207,8 +202,8 @@ class PostController extends AbstractController
     /**
      * Delete action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request        HTTP request
-     * @param \App\Entity\Post                          $post           Category entity
+     * @param \Symfony\Component\HttpFoundation\Request $request HTTP request
+     * @param \App\Entity\Post                          $post    Category entity
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -237,7 +232,7 @@ class PostController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->postService->delete($post);
-            $this->addFlash('success', 'deleted_successfully');
+            $this->addFlash('success', 'message.deleted_successfully');
 
             return $this->redirectToRoute('post_index');
         }

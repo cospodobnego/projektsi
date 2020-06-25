@@ -1,4 +1,7 @@
 <?php
+/**
+ * Category repository.
+ */
 
 namespace App\Repository;
 
@@ -27,7 +30,7 @@ class CategoryRepository extends ServiceEntityRepository
     const PAGINATOR_ITEMS_PER_PAGE = 4;
 
     /**
-     * PostRepository constructor.
+     * CategoryRepository constructor.
      *
      * @param \Doctrine\Common\Persistence\ManagerRegistry $registry Manager registry
      */
@@ -47,17 +50,7 @@ class CategoryRepository extends ServiceEntityRepository
             ->orderBy('category.name', 'ASC');
     }
 
-    /**
-     * Get or create new query builder.
-     *
-     * @param \Doctrine\ORM\QueryBuilder|null $queryBuilder Query builder
-     *
-     * @return \Doctrine\ORM\QueryBuilder Query builder
-     */
-    private function getOrCreateQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
-    {
-        return $queryBuilder ?? $this->createQueryBuilder('category');
-    }
+
 
     /**
      * Save record.
@@ -85,5 +78,17 @@ class CategoryRepository extends ServiceEntityRepository
     {
         $this->_em->remove($category);
         $this->_em->flush($category);
+    }
+
+    /**
+     * Get or create new query builder.
+     *
+     * @param \Doctrine\ORM\QueryBuilder|null $queryBuilder Query builder
+     *
+     * @return \Doctrine\ORM\QueryBuilder Query builder
+     */
+    private function getOrCreateQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
+    {
+        return $queryBuilder ?? $this->createQueryBuilder('category');
     }
 }

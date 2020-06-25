@@ -70,17 +70,6 @@ class CommentRepository extends ServiceEntityRepository
         return $queryBuilder;
     }
 
-    /**
-     * Get or create new query builder.
-     *
-     * @param \Doctrine\ORM\QueryBuilder|null $queryBuilder Query builder
-     *
-     * @return \Doctrine\ORM\QueryBuilder Query builder
-     */
-    private function getOrCreateQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
-    {
-        return $queryBuilder ?? $this->createQueryBuilder('comment');
-    }
 
     /**
      * Save record.
@@ -108,5 +97,16 @@ class CommentRepository extends ServiceEntityRepository
     {
         $this->_em->remove($comment);
         $this->_em->flush($comment);
+    }
+    /**
+     * Get or create new query builder.
+     *
+     * @param \Doctrine\ORM\QueryBuilder|null $queryBuilder Query builder
+     *
+     * @return \Doctrine\ORM\QueryBuilder Query builder
+     */
+    private function getOrCreateQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
+    {
+        return $queryBuilder ?? $this->createQueryBuilder('comment');
     }
 }

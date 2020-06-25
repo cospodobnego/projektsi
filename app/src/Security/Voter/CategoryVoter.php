@@ -67,7 +67,6 @@ class CategoryVoter extends Voter
 
         // ... (check conditions and return true to grant permission) ...
         switch ($attribute) {
-
             case 'EDIT':
                 if ($this->security->isGranted('ROLE_ADMIN')) {
                     return true;

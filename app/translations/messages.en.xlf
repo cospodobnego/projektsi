@@ -350,15 +350,42 @@
                 <source>Email</source>
                 <target>Email</target>
             </trans-unit>
-            <trans-unit id="You are logged in as, {{ app.user.username }}">
-                <source>You are logged in as, {{ app.user.username }}</source>
-                <target>You are logged in as, {{ app.user.username }}</target>
+            <trans-unit id="You are logged in">
+                <source>You are logged in as,</source>
+                <target>You are logged in as,</target>
             </trans-unit>
             <trans-unit id="Please sign in">
                 <source>Please sign in</source>
                 <target>Zaloguj się</target>
             </trans-unit>
-
+            <trans-unit id="Email could not be found.">
+                <source>Email could not be found.</source>
+                <target>Email could not be found.</target>
+            </trans-unit>
+            <trans-unit id="message.updated_successfully">
+                <source>message.updated_successfully</source>
+                <target>updated successfully</target>
+            </trans-unit>
+            <trans-unit id="message_category_contains_posts">
+                <source>message_category_contains_posts</source>
+                <target>category contains posts</target>
+            </trans-unit>
+            <trans-unit id="message.deleted_successfully">
+                <source>message.deleted_successfully</source>
+                <target>deleted successfully</target>
+            </trans-unit>
+            <trans-unit id="message.created_successfully">
+                <source>message.created_successfully</source>
+                <target>created successfully</target>
+            </trans-unit>
+            <trans-unit id="message.registered_successfully">
+                <source>message.registered_successfully</source>
+                <target>registered successfully</target>
+            </trans-unit>
+            <trans-unit id="message.changed_successfully">
+                <source>message.changed_successfully</source>
+                <target>changed successfully</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

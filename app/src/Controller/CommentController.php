@@ -9,7 +9,6 @@ use App\Entity\Comment;
 use App\Entity\Post;
 use App\Form\CommentType;
 use App\Service\CommentService;
-use Knp\Component\Pager\PaginatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -43,9 +42,7 @@ class CommentController extends AbstractController
     /**
      * Index action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request           HTTP request
-     * @param \App\Repository\CommentRepository         $commentRepository Comment repository
-     * @param \Knp\Component\Pager\PaginatorInterface   $paginator         Paginator
+     * @param \Symfony\Component\HttpFoundation\Request $request HTTP request
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -91,7 +88,7 @@ class CommentController extends AbstractController
     /**
      * Create action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request           HTTP request
+     * @param \Symfony\Component\HttpFoundation\Request $request HTTP request
      * @param \App\Entity\Post                          $post    Post entity
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
@@ -116,19 +113,18 @@ class CommentController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             $comment->setAuthor($this->getUser());
             $comment->setPost($post);
             $this->commentService->save($comment);
-            $this->addFlash('success', 'created_successfully');
+            $this->addFlash('success', 'message.created_successfully');
 
-            return $this->redirectToRoute('post_show',['id' => $post->getId()]);
+            return $this->redirectToRoute('post_show', ['id' => $post->getId()]);
         }
 
         return $this->render(
             'comment/create.html.twig',
             [   'post' => $post,
-                'form' => $form->createView()
+                'form' => $form->createView(),
             ]
         );
     }
@@ -136,9 +132,9 @@ class CommentController extends AbstractController
     /**
      * Edit action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request           HTTP request
-     * @param \App\Entity\Comment                       $comment           Comment entity
-     * @param \App\Repository\CommentRepository         $commentRepository Comment repository
+     * @param \Symfony\Component\HttpFoundation\Request $request HTTP request
+     * @param \App\Entity\Comment                       $comment Comment entity
+     *
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -161,13 +157,11 @@ class CommentController extends AbstractController
         $form = $this->createForm(CommentType::class, $comment, ['method' => 'PUT']);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid())
-
-        {
+        if ($form->isSubmitted() && $form->isValid()) {
             $this->commentService->save($comment);
-            $this->addFlash('success', 'updated_successfully');
+            $this->addFlash('success', 'message.updated_successfully');
 
-            return $this->redirectToRoute('post_show',['id' => $comment->getPost()->getId()]);
+            return $this->redirectToRoute('post_show', ['id' => $comment->getPost()->getId()]);
         }
 
         return $this->render(
@@ -182,9 +176,9 @@ class CommentController extends AbstractController
     /**
      * Delete action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request           HTTP request
-     * @param \App\Entity\Comment                       $comment           Comment entity
-     * @param \App\Repository\CommentRepository         $commentRepository Comment repository
+     * @param \Symfony\Component\HttpFoundation\Request $request HTTP request
+     * @param \App\Entity\Comment                       $comment Comment entity
+     *
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -214,9 +208,9 @@ class CommentController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $postId = $comment->getPost()->getId();
             $this->commentService->delete($comment);
-            $this->addFlash('success', 'deleted successfully');
+            $this->addFlash('success', 'message.deleted_successfully');
 
-            return $this->redirectToRoute('post_show',['id' => $postId]);
+            return $this->redirectToRoute('post_show', ['id' => $postId]);
         }
 
         return $this->render(
@@ -231,9 +225,8 @@ class CommentController extends AbstractController
     /**
      * My comments action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request           HTTP request
+     * @param \Symfony\Component\HttpFoundation\Request $request HTTP request
      *
-     * @param \Knp\Component\Pager\PaginatorInterface   $paginator         Paginator
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -242,6 +235,7 @@ class CommentController extends AbstractController
      *     methods={"GET"},
      *     name="comment_mycomments",
      * )
+     * @isGranted("ROLE_USER")
      */
     public function myComments(Request $request): Response
     {

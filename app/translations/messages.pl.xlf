@@ -350,14 +350,43 @@
                 <source>Email</source>
                 <target>Email</target>
             </trans-unit>
-            <trans-unit id="You are logged in as, {{ app.user.username }}">
-                <source>You are logged in as, {{ app.user.username }}</source>
-                <target>Jesteś zalogowany/a jako, {{ app.user.username }}</target>
+            <trans-unit id="You are logged in as">
+                <source>You are logged in as,</source>
+                <target>Jesteś zalogowany/a jako,</target>
             </trans-unit>
             <trans-unit id="Please sign in">
                 <source>Please sign in</source>
                 <target>Zaloguj się</target>
             </trans-unit>
+            <trans-unit id="Email could not be found.">
+                <source>Email could not be found.</source>
+                <target>Nie ma konta z takim emailem</target>
+            </trans-unit>
+            <trans-unit id="message.updated_successfully">
+                <source>message.updated_successfully</source>
+                <target>zaaktualizowano</target>
+            </trans-unit>
+            <trans-unit id="message_category_contains_posts">
+                <source>message_category_contains_posts</source>
+                <target>ta kategoria jest przypisana do posta</target>
+            </trans-unit>
+            <trans-unit id="message.deleted_successfully">
+                <source>message.deleted_successfully</source>
+                <target>usunięto</target>
+            </trans-unit>
+            <trans-unit id="message.created_successfully">
+                <source>message.created_successfully</source>
+                <target>dodano pomyślnie</target>
+            </trans-unit>
+            <trans-unit id="message.registered_successfully">
+                <source>message.registered_successfully</source>
+                <target>zarejestrowano użytkownika</target>
+            </trans-unit>
+            <trans-unit id="message.changed_successfully">
+                <source>message.changed_successfully</source>
+                <target>zmieniono</target>
+            </trans-unit>
+
 
         </body>
     </file>

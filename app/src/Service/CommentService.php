@@ -5,13 +5,11 @@
 
 namespace App\Service;
 
-
 use App\Entity\Comment;
 use App\Entity\User;
 use App\Repository\CommentRepository;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
-
 
 /**
  * Class CommentService.
@@ -34,8 +32,8 @@ class CommentService
     /**
      * CategoryService constructor.
      *
-     * @param \App\Repository\CategoryRepository      $categoryRepository Category repository
-     * @param \Knp\Component\Pager\PaginatorInterface $paginator          Paginator
+     * @param \App\Repository\CommentRepository       $commentRepository Comment repository
+     * @param \Knp\Component\Pager\PaginatorInterface $paginator         Paginator
      */
     public function __construct(CommentRepository $commentRepository, PaginatorInterface $paginator)
     {
@@ -61,8 +59,9 @@ class CommentService
     /**
      * Create paginated list of usercomments.
      *
-     * @param int $page Page number
+     * @param int              $page Page number
      * @param \App\Entity\User $user User
+     *
      * @return \Knp\Component\Pager\Pagination\PaginationInterface Paginated list
      */
     public function createPaginatedList1(int $page, User $user): PaginationInterface
