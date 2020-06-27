@@ -79,6 +79,7 @@ class Comment
      * @ORM\JoinColumn(nullable=false)
      */
     private $author;
+
     /**
      * Getter for Id.
      *
@@ -88,6 +89,7 @@ class Comment
     {
         return $this->id;
     }
+
     /**
      * Getter for Date.
      *
@@ -97,6 +99,7 @@ class Comment
     {
         return $this->date;
     }
+
     /**
      * Setter for Date.
      *
@@ -106,6 +109,7 @@ class Comment
     {
         $this->date = $date;
     }
+
     /**
      * Getter for Text.
      *
@@ -115,6 +119,7 @@ class Comment
     {
         return $this->text;
     }
+
     /**
      * Setter for Text.
      *
@@ -124,6 +129,7 @@ class Comment
     {
         $this->text = $text;
     }
+
     /**
      * Getter for post.
      *
@@ -133,6 +139,7 @@ class Comment
     {
         return $this->post;
     }
+
     /**
      * Setter for post.
      *
@@ -142,6 +149,7 @@ class Comment
     {
         $this->post = $post;
     }
+
     /**
      * Getter for author.
      *
@@ -151,6 +159,7 @@ class Comment
     {
         return $this->author;
     }
+
     /**
      * Setter for author.
      *

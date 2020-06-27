@@ -9,12 +9,12 @@ use App\Entity\User;
 use App\Form\UserEmailType;
 use App\Form\UserPasswordType;
 use App\Service\UserService;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
  * Class UserController.
@@ -47,6 +47,7 @@ class UserController extends AbstractController
         $this->userService = $userService;
         $this->passwordEncoder = $passwordEncoder;
     }
+
     /**
      * Index action.
      *
@@ -64,6 +65,7 @@ class UserController extends AbstractController
             'user' => $userEmail,
         ]);
     }
+
     /**
      * Userlist action.
      *
@@ -84,13 +86,11 @@ class UserController extends AbstractController
         $page = $request->query->getInt('page', 1);
         $pagination = $this->userService->createPaginatedList($page);
 
-
         return $this->render(
             'user/admin_panel.html.twig',
             ['pagination' => $pagination]
         );
     }
-
 
     /**
      * Edit action.

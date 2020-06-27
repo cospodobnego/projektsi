@@ -79,6 +79,7 @@ class TagRepository extends ServiceEntityRepository
         $this->_em->remove($tag);
         $this->_em->flush($tag);
     }
+
     /**
      * Get or create new query builder.
      *

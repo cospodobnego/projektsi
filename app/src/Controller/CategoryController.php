@@ -6,14 +6,14 @@
 namespace App\Controller;
 
 use App\Entity\Category;
-use App\Service\CategoryService;
 use App\Form\CategoryType;
+use App\Service\CategoryService;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
  * Class CategoryController.
@@ -27,13 +27,13 @@ class CategoryController extends AbstractController
      *
      * @var \App\Service\CategoryService
      */
-        private $categoryService;
+    private $categoryService;
 
-        /**
-         * CategoryController constructor.
-         *
-         * @param \App\Service\CategoryService $categoryService Category service
-         */
+    /**
+     * CategoryController constructor.
+     *
+     * @param \App\Service\CategoryService $categoryService Category service
+     */
     public function __construct(CategoryService $categoryService)
     {
         $this->categoryService = $categoryService;
@@ -89,7 +89,6 @@ class CategoryController extends AbstractController
      * Create action.
      *
      * @param \Symfony\Component\HttpFoundation\Request $request HTTP request
-     *
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -185,7 +184,6 @@ class CategoryController extends AbstractController
      *     "DELETE",
      *     subject="category",
      * )
-     *
      */
     public function delete(Request $request, Category $category): Response
     {

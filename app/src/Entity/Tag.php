@@ -166,6 +166,7 @@ class Tag
     {
         return $this->code;
     }
+
     /**
      * Setter for Code.
      *

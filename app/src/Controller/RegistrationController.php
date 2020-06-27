@@ -35,6 +35,7 @@ class RegistrationController extends AbstractController
     {
         $this->registrationService = $registrationService;
     }
+
     /**
      * Register action.
      *

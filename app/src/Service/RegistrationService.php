@@ -19,6 +19,7 @@ class RegistrationService
      * @var \App\Repository\UserRepository
      */
     private $userRepository;
+
     /**
      * Paginator.
      *
@@ -30,6 +31,7 @@ class RegistrationService
     {
         $this->userRepository = $userRepository;
     }
+
     /**
      * Save user.
      *

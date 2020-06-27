@@ -56,6 +56,7 @@ class CommentService
             CommentRepository::PAGINATOR_ITEMS_PER_PAGE
         );
     }
+
     /**
      * Create paginated list of usercomments.
      *

@@ -1,0 +1,111 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/posts.css') }}">
+{% endblock %}
+
+    {% block title %}
+        {{ 'common_post'|trans }}
+    {% endblock %}
+
+    {% block body %}
+        {{ parent() }}
+
+        {% if post is defined %}
+            <main>
+                <div class="container mt-3 text-center">
+                    {% include 'default/_flash_messages.html.twig' %}
+                    <article>
+                        <div class="search-item m-4 text-left">
+                            <h3 class="pr-4">{{ post.title }}</h3>
+                            {% if is_granted('EDIT', post) %}
+                                <a href="{{ url('post_edit', {id: post.id}) }}">
+                                    <i class="far fa-edit"></i>
+                                </a>
+                            {% endif %}
+                            {% if is_granted('DELETE', post) %}
+                                <a href="{{ url('post_delete', {id: post.id}) }}">
+                                    <i class="fas fa-trash-alt"></i>
+                                </a>
+                            {% endif %}
+                            <div class="mb-15">
+                                <ul class="list-inline">
+                                    <li class="time">{{ post.creationDate | format_date('short') }}</li>
+                                    <li class="author">{{ post.user.email }}</li>
+                                    <li>{{ 'common_category'|trans }}: {{ post.category.name }}</li>
+                                    {% if post.postStatus.slug is same as('draft') %}
+                                        <li class="text-danger">{{ 'common_draft' |trans }}</li>
+                                    {% endif %}
+                                    {% if post.tags|length %}
+                                        <li>{{ 'common_tags'|trans }}:</li>
+                                        <li>
+                                            {% for tag in post.tags %}
+                                                <span>{{ tag.name }}</span>
+                                            {% endfor %}
+                                        </li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                            <div>
+                                {{ post.content|markdown_to_html }}
+                            </div>
+                            {% if post.getImage() %}
+                                <div class="imageDiv">
+                                    <img class="img" alt="post image"
+                                         src="{{ asset('uploads/images/'~ post.getImage().getFilename()) }}">
+                                </div>
+                            {% endif %}
+                            {% if post.comments|length > 0 %}
+                                <button class="btn btn-primary mt-4 showCommentsButton"
+                                        type="button">{{ 'homepage_show_comments'|trans }}</button>
+                                <div class="comments mt-4">
+                                    <h4>{{ 'homepage_comments'|trans }}:</h4>
+                                    <ul class="list-inline mt-4">
+                                        {% for comment in post.comments %}
+                                            <li class="comment pr-5">
+                                                <h5>{{ comment.user.email }}</h5>
+                                                {% if is_granted('EDIT', comment) %}
+                                                    <a href="{{ url('comment_edit', {id: comment.id}) }}">
+                                                        <i class="far fa-edit editCommentIcon"></i>
+                                                    </a>
+                                                {% endif %}
+                                                {% if is_granted('DELETE', comment) %}
+                                                    <a href="{{ url('comment_delete', {id: comment.id}) }}">
+                                                        <i class="fas fa-trash-alt deleteCommentIcon"></i>
+                                                    </a>
+                                                {% endif %}
+                                                <p>{{ comment.content }}</p>
+                                                <hr/>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            {% endif %}
+                            <div class="mt-4 text-center f-flex justify-content-center">
+                                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                                    <a class="btn text-white btn-primary addCommentButton col-md-2 col-6 m-md-0"
+                                       href="{{ url('comment_create', {id: post.id}) }}">
+                                        {{ 'comments_add'|trans }}
+                                    </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </article>
+                    <a href="{{ url('post_index') }}" class="btn btn-light text-center m-auto">
+                        {{ 'common_back'|trans }}
+                    </a>
+                </div>
+            </main>
+        {% else %}
+            {% include 'default/_single_flash_message.html.twig' with {
+                type: 'danger',
+                message: 'message_connection_fail'|trans
+            } %}
+        {% endif %}
+    {% endblock %}
+
+    {% block javascripts %}
+        {{ parent() }}
+        <script src="{{ asset('js/posts.js') }}"></script>
+    {% endblock %}

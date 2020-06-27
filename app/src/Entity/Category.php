@@ -65,8 +65,6 @@ class Category
      *      mappedBy="category",
      *     fetch="EXTRA_LAZY",
      *     )
-     *
-     *
      */
     private $posts;
 
@@ -131,6 +129,7 @@ class Category
     {
         return $this->posts;
     }
+
     /**
      * Add Post.
      *
@@ -143,6 +142,7 @@ class Category
             $post->setCategory($this);
         }
     }
+
     /**
      * Remove Post.
      *
@@ -158,6 +158,7 @@ class Category
             }
         }
     }
+
     /**
      * Getter for Code.
      *
@@ -167,6 +168,7 @@ class Category
     {
         return $this->code;
     }
+
     /**
      * Setter for Code.
      *

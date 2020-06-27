@@ -78,6 +78,7 @@ class PostService
             PostRepository::PAGINATOR_ITEMS_PER_PAGE
         );
     }
+
     /**
      * Show user's posts list.
      *

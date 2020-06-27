@@ -10,10 +10,10 @@ use App\Form\PostType;
 use App\Service\PostService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
 
 /**
  * Class PostController.
@@ -33,12 +33,12 @@ class PostController extends AbstractController
      * PostController constructor.
      *
      * @param \App\Service\PostService $postService Post service
-     *
      */
     public function __construct(PostService $postService)
     {
         $this->postService = $postService;
     }
+
     /**
      * Index action.
      *
@@ -68,7 +68,6 @@ class PostController extends AbstractController
      * My posts action.
      *
      * @param \Symfony\Component\HttpFoundation\Request $request HTTP request
-     *
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *

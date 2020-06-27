@@ -65,10 +65,7 @@ class CommentRepository extends ServiceEntityRepository
         return $this->getOrCreateQueryBuilder()
             ->andWhere('comment.author = :author')
             ->setParameter('author', $user);
-
-
     }
-
 
     /**
      * Save record.
@@ -97,6 +94,7 @@ class CommentRepository extends ServiceEntityRepository
         $this->_em->remove($comment);
         $this->_em->flush($comment);
     }
+
     /**
      * Get or create new query builder.
      *

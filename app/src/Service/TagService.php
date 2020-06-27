@@ -94,6 +94,7 @@ class TagService
     {
         $this->tagRepository->delete($tag);
     }
+
     /**
      * Find tag by Id.
      *

@@ -10,10 +10,10 @@ use App\Form\TagType;
 use App\Service\TagService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
 
 /**
  * Class TagController.
@@ -27,13 +27,13 @@ class TagController extends AbstractController
      *
      * @var \App\Service\TagService
      */
-        private $tagService;
+    private $tagService;
 
-        /**
-         * TagController constructor.
-         *
-         * @param \App\Service\TagService $tagService Tag service
-         */
+    /**
+     * TagController constructor.
+     *
+     * @param \App\Service\TagService $tagService Tag service
+     */
     public function __construct(TagService $tagService)
     {
         $this->tagService = $tagService;
@@ -50,7 +50,6 @@ class TagController extends AbstractController
      *     "/",
      *     name="tag_index",
      * )
-     *
      */
     public function index(Request $request): Response
     {

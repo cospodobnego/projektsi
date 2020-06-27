@@ -6,7 +6,6 @@
 namespace App\Form;
 
 use App\Entity\Category;
-use App\Entity\Comment;
 use App\Entity\Post;
 use App\Form\DataTransformer\TagDataTransformer;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;

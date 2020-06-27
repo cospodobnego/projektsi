@@ -6,8 +6,8 @@
 namespace App\Repository;
 
 use App\Entity\Category;
-use App\Entity\Tag;
 use App\Entity\Post;
+use App\Entity\Tag;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
@@ -61,8 +61,8 @@ class PostRepository extends ServiceEntityRepository
             ->join('post.category', 'category')
             ->leftJoin('post.tag', 'tag')
             ->orderBy('post.date', 'DESC');
-
     }
+
 //
 //    /**
 //     * Query all records.
@@ -74,6 +74,7 @@ class PostRepository extends ServiceEntityRepository
 //        return $this->getOrCreateQueryBuilder()
 //            ->orderBy('post.date', 'DESC');
 //    }
+
     /**
      * Query all records.
      *
@@ -96,6 +97,7 @@ class PostRepository extends ServiceEntityRepository
 
         return $queryBuilder;
     }
+
     /**
      * Save record.
      *
@@ -123,6 +125,7 @@ class PostRepository extends ServiceEntityRepository
         $this->_em->remove($post);
         $this->_em->flush($post);
     }
+
     /**
      * Apply filters to paginated list.
      *
@@ -145,6 +148,7 @@ class PostRepository extends ServiceEntityRepository
 
         return $queryBuilder;
     }
+
     /**
      * Get or create new query builder.
      *

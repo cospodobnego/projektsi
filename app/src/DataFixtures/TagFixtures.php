@@ -19,6 +19,7 @@ class TagFixtures extends AbstractBaseFixtures
      * @var array
      */
     private $value = [];
+
     /**
      * Load data.
      *
@@ -31,7 +32,6 @@ class TagFixtures extends AbstractBaseFixtures
             $newName = $this->faker->unique()->word;
             $this->value[] = $newName;
             $tag->setName($newName);
-
 
             return $tag;
         });

@@ -20,6 +20,7 @@ class PostFixtures extends AbstractBaseFixtures implements DependentFixtureInter
      * @var array
      */
     private $value = [];
+
     /**
      * Load data.
      *

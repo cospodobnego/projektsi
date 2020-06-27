@@ -43,6 +43,7 @@ class UserPasswordType extends AbstractType
 
     /**
      * Configure options action.
+     *
      * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver The resolver for the options
      */
     public function configureOptions(OptionsResolver $resolver)

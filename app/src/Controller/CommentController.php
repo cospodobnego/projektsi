@@ -11,10 +11,10 @@ use App\Form\CommentType;
 use App\Service\CommentService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
 
 /**
  * Class CommentController.
@@ -39,6 +39,7 @@ class CommentController extends AbstractController
     {
         $this->commentService = $commentService;
     }
+
     /**
      * Index action.
      *
@@ -55,7 +56,6 @@ class CommentController extends AbstractController
     {
         $page = $request->query->getInt('page', 1);
         $pagination = $this->commentService->createPaginatedList($page);
-
 
         return $this->render(
             'comment/index.html.twig',
@@ -123,7 +123,7 @@ class CommentController extends AbstractController
 
         return $this->render(
             'comment/create.html.twig',
-            [   'post' => $post,
+            ['post' => $post,
                 'form' => $form->createView(),
             ]
         );
@@ -134,7 +134,6 @@ class CommentController extends AbstractController
      *
      * @param \Symfony\Component\HttpFoundation\Request $request HTTP request
      * @param \App\Entity\Comment                       $comment Comment entity
-     *
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -178,7 +177,6 @@ class CommentController extends AbstractController
      *
      * @param \Symfony\Component\HttpFoundation\Request $request HTTP request
      * @param \App\Entity\Comment                       $comment Comment entity
-     *
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -226,7 +224,6 @@ class CommentController extends AbstractController
      * My comments action.
      *
      * @param \Symfony\Component\HttpFoundation\Request $request HTTP request
-     *
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
