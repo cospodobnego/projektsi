@@ -56,10 +56,7 @@ class User implements UserInterface
      *     length=255,
      *
      * )
-     * @Assert\Length(
-     *     min="6",
-     *     max="200",
-     * )
+     *
      * @Assert\NotBlank
      * @Assert\Email
      */
@@ -83,7 +80,7 @@ class User implements UserInterface
      * @Assert\NotBlank
      * @Assert\Length(
      *     min="6",
-     *     max="60",
+     *     max="200",
      * )
      */
     private $password;

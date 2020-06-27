@@ -350,9 +350,9 @@
                 <source>Email</source>
                 <target>Email</target>
             </trans-unit>
-            <trans-unit id="You are logged in as">
-                <source>You are logged in as,</source>
-                <target>Jesteś zalogowany/a jako,</target>
+            <trans-unit id="You are logged in">
+                <source>You are logged in</source>
+                <target>Jesteś zalogowany/a</target>
             </trans-unit>
             <trans-unit id="Please sign in">
                 <source>Please sign in</source>

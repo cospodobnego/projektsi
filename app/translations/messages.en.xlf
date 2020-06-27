@@ -351,8 +351,8 @@
                 <target>Email</target>
             </trans-unit>
             <trans-unit id="You are logged in">
-                <source>You are logged in as,</source>
-                <target>You are logged in as,</target>
+                <source>You are logged in</source>
+                <target>You are logged in</target>
             </trans-unit>
             <trans-unit id="Please sign in">
                 <source>Please sign in</source>

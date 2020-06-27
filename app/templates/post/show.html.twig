@@ -14,7 +14,9 @@
             <dt>{{ 'Date'|trans }}</dt>
             <dd>{{ post.date|date('Y/m/d') }}</dd>
             <dt>{{ 'Category'|trans }}</dt>
-            <dd>{{  post.category.name }}</dd>
+            <dd> <a href="{{ url('post_index', {'filters' : {'category' : post.category.id}}) }}" title="{{ post.category.name }}">
+                    {{ post.category.name }}
+                </a></dd>
             <dt>{{ 'tags'|trans }}</dt>
             <dd>{% if post.tag is defined and post.tag|length %}
                     {% for tag in post.tag %}

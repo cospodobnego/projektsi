@@ -12,7 +12,7 @@ use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\QueryBuilder;
 
 /**
- * Class PostRepository.
+ * Class CommentRepository.
  *
  * @method Comment|null find($id, $lockMode = null, $lockVersion = null)
  * @method Comment|null findOneBy(array $criteria, array $orderBy = null)
@@ -33,7 +33,7 @@ class CommentRepository extends ServiceEntityRepository
     const PAGINATOR_ITEMS_PER_PAGE = 4;
 
     /**
-     * PostRepository constructor.
+     * CommentRepository constructor.
      *
      * @param \Doctrine\Common\Persistence\ManagerRegistry $registry Manager registry
      */
@@ -62,12 +62,11 @@ class CommentRepository extends ServiceEntityRepository
      */
     public function queryByAuthor(User $user): QueryBuilder
     {
-        $queryBuilder = $this->queryAll();
-
-        $queryBuilder->andWhere('comment.author = :author')
+        return $this->getOrCreateQueryBuilder()
+            ->andWhere('comment.author = :author')
             ->setParameter('author', $user);
 
-        return $queryBuilder;
+
     }
 
 

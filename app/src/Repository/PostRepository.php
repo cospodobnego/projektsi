@@ -53,12 +53,15 @@ class PostRepository extends ServiceEntityRepository
      */
     public function queryByAuthor(User $user): QueryBuilder
     {
-        $queryBuilder = $this->queryAll();
+        return $this->getOrCreateQueryBuilder()
 
-        $queryBuilder->andWhere('post.author = :author')
-            ->setParameter('author', $user);
+            ->andWhere('post.author = :author')
+            ->setParameter('author', $user)
+            ->select('post', 'category', 'tag')
+            ->join('post.category', 'category')
+            ->leftJoin('post.tag', 'tag')
+            ->orderBy('post.date', 'DESC');
 
-        return $queryBuilder;
     }
 //
 //    /**
